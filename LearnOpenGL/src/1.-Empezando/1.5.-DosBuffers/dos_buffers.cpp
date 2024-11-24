@@ -8,20 +8,20 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
 const char* vertexShaderSource =
-	"#version 330 core \n"
-	"layout (location = 0) in vec3 aPos; \n"
-	"void main(){\n"
-	"	gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-	"}\0";
+"#version 330 core \n"
+"layout (location = 0) in vec3 aPos; \n"
+"void main(){\n"
+"	gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+"}\0";
 const char* fragmentShaderSource =
-	"#version 330 core \n"
-	"out vec4 FragColor;\n"
-	"void main(){\n"
-	"	FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-	"}\0";
+"#version 330 core \n"
+"out vec4 FragColor;\n"
+"void main(){\n"
+"	FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+"}\0";
 
 int main() {
-	glfwInit(); 
+	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -45,7 +45,7 @@ int main() {
 	vertexShader = glCreateShader(GL_VERTEX_SHADER); // Crea un objeto de sombreador de vertices
 	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL); // Remplaza el codigo fuente en un objeto sombreador
 	glCompileShader(vertexShader); // Compila un objeto sombreador
-	int sucess; 
+	int sucess;
 	char infoLog[512];
 	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &sucess); // Devuelve un parametro de un objeto sombreador
 	if (!sucess) {
@@ -64,37 +64,46 @@ int main() {
 	}
 
 	unsigned int shaderProgram;
-	shaderProgram = glCreateProgram(); // Crea un objeto de programa vacio distinto a cero y se pueden adjuntar objetos de sombreado
+	shaderProgram = glCreateProgram();
 	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader); // Adjunta un objeto sombreador a un objeto de programa
-	glLinkProgram(shaderProgram); // Vincula un objeto de programa
+	glAttachShader(shaderProgram, fragmentShader);
+	glLinkProgram(shaderProgram);
 	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &sucess);
 	if (!sucess) {
 		glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
 		std::cout << "ERROR::SHADER::LINKEO::COMPILACION_FALLIDA\n" << infoLog << std::endl;
 	}
 
+	float primerTriangulo[] = {
+		// Primer triangulo
+		-0.9f, -0.5f, 0.0f,
+		 0.0f, -0.5f, 0.0f,
+		-0.45f,  0.5f, 0.0f,
+	};
+	float segundoTriangulo[] = {
+		// Segundo triangulo
+		 0.0f, -0.5f, 0.0f,
+		 0.9f, -0.5f, 0.0f,
+		 0.45f,  0.5f, 0.0f,
+	};
 
+	unsigned int VBO[2], VAO[2];
+	glGenVertexArrays(2, VAO);
+	glGenBuffers(2, VBO);
 
-	float vertices[] = { 
-		-0.5f, -0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		 0.0f,  0.5f, 0.0f,
-	}; //Se declaran los vértices del triangulo donde cada vértice tiene una profundidad de 0.0 lo cual nos dará una figura en 2D
-
-	unsigned int VBO, VAO;
-	glGenBuffers(1, &VBO); // Genera nombres de objetos de buffer
-	glGenVertexArrays(1, &VAO); // Genera nombres de objetos de matriz de vértices
-	glBindVertexArray(VAO); //  Vincula un objeto de matriz de vértices
-	glBindBuffer(GL_ARRAY_BUFFER, VBO); // Vincula un objeto de bufer con nombre, GL_ARRAY_BUFFER Atributos de vertices
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); // Crea e inicializa el almacen de datos de un objeto de buffer
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0); // define una matriz de datos de atributos de vértice genérico
-	glEnableVertexAttribArray(0); // Habilite o deshabilite una matriz de atributos de vértice genérica
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	glBindVertexArray(0); // vincula un objeto de matriz de vértices
+	// Primer triangulo
+	glBindVertexArray(VAO[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(primerTriangulo), primerTriangulo, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	
+	// Segundo triangulo
+	glBindVertexArray(VAO[1]);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(segundoTriangulo), segundoTriangulo, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glEnableVertexAttribArray(0);
 
 	while (!glfwWindowShouldClose(window)) {
 		// Entradas
@@ -105,18 +114,23 @@ int main() {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glUseProgram(shaderProgram); // Instala un objeto de programa como parte del estado de renderizado actual
-		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glUseProgram(shaderProgram);
+		// Primer triangulo
+		glBindVertexArray(VAO[0]);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		// Segundo triangulo
+		glBindVertexArray(VAO[1]);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		// Llamada de eventos y intercambio de buffers
 		glfwSwapBuffers(window);
-		glfwPollEvents(); // Función para el procesamiento de eventos
+		glfwPollEvents();
 	}
 
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
-	glDeleteProgram(shaderProgram); // Elimina un objeto de sombreado
+	glDeleteVertexArrays(2, VAO);
+	glDeleteBuffers(2, VBO);
+	glDeleteProgram(shaderProgram);
 
 	glfwTerminate();
 	return 0;

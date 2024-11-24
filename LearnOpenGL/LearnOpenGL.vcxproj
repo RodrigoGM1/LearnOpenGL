@@ -142,6 +142,10 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="src\1.-Empezando\1.1.-HolaVentana\hola_ventan.cpp" />
     <ClCompile Include="src\1.-Empezando\1.2.-HolaTriangulo\hola_triangulo.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.3.-Rectanculo\rectangulo.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.4.-DosTriangulos\dos_triangulos.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.5.-DosBuffers\dos_buffers.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.6.-DosProgramasShader\dos_programas.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
