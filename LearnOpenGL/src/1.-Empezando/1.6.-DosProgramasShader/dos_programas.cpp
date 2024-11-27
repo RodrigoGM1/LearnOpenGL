@@ -1,3 +1,4 @@
+/*
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 
@@ -135,6 +136,10 @@ int main() {
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 	glEnableVertexAttribArray(0);
 
+	int nAtributos;
+	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nAtributos); // Devuelve el valor o valores de un parametro selecionado
+	std::cout << "Numero maximo de atributos de vertices: " << nAtributos << std::endl;
+
 	while (!glfwWindowShouldClose(window)) {
 		// Entradas
 		processInput(window);
@@ -177,3 +182,4 @@ void processInput(GLFWwindow* window) {
 		glfwSetWindowShouldClose(window, true);
 	}
 }
+*/

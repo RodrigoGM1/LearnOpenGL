@@ -36,5 +36,62 @@
     <ClCompile Include="src\1.-Empezando\1.6.-DosProgramasShader\dos_programas.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.7.-Sombreadores\sombreadores.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.8.-SombreadoColores\sombreador_color.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="clases\Shader.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.9.-ClaseSombreador\class_sombreador.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.10.-TrianguloVolteado\triangulo_volteado.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.11.-Desplazamiento\desplazamiento.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.12.-Posision\posision.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.13.-Texturas\texturas.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="clases\stb_image.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.14.-CombinarTexturas\texturas_combinadas.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="clases\Shader.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="clases\stb_image.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\1.-Empezando\1.9.-ClaseSombreador\shader.vs" />
+    <None Include="src\1.-Empezando\1.9.-ClaseSombreador\shader.fs" />
+    <None Include="src\1.-Empezando\1.10.-TrianguloVolteado\shader.fs" />
+    <None Include="src\1.-Empezando\1.10.-TrianguloVolteado\shader.vs" />
+    <None Include="src\1.-Empezando\1.11.-Desplazamiento\shader.fs" />
+    <None Include="src\1.-Empezando\1.11.-Desplazamiento\shader.vs" />
+    <None Include="src\1.-Empezando\1.12.-Posision\shader.fs" />
+    <None Include="src\1.-Empezando\1.12.-Posision\shader.vs" />
+    <None Include="src\1.-Empezando\1.13.-Texturas\shader.fs" />
+    <None Include="src\1.-Empezando\1.13.-Texturas\shader.vs" />
+    <None Include="src\1.-Empezando\1.14.-CombinarTexturas\shader.fs" />
+    <None Include="src\1.-Empezando\1.14.-CombinarTexturas\shader.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="texturas\container.jpg">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
   </ItemGroup>
 </Project>

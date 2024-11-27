@@ -71,11 +71,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)include;$(SolutionDir)\LearnOpenGL\clases;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)include;$(SolutionDir)\LearnOpenGL\clases;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -139,13 +139,44 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="clases\Shader.cpp" />
+    <ClCompile Include="clases\stb_image.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="src\1.-Empezando\1.1.-HolaVentana\hola_ventan.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.10.-TrianguloVolteado\triangulo_volteado.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.11.-Desplazamiento\desplazamiento.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.12.-Posision\posision.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.13.-Texturas\texturas.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.14.-CombinarTexturas\texturas_combinadas.cpp" />
     <ClCompile Include="src\1.-Empezando\1.2.-HolaTriangulo\hola_triangulo.cpp" />
     <ClCompile Include="src\1.-Empezando\1.3.-Rectanculo\rectangulo.cpp" />
     <ClCompile Include="src\1.-Empezando\1.4.-DosTriangulos\dos_triangulos.cpp" />
     <ClCompile Include="src\1.-Empezando\1.5.-DosBuffers\dos_buffers.cpp" />
     <ClCompile Include="src\1.-Empezando\1.6.-DosProgramasShader\dos_programas.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.7.-Sombreadores\sombreadores.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.8.-SombreadoColores\sombreador_color.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.9.-ClaseSombreador\class_sombreador.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="clases\Shader.h" />
+    <ClInclude Include="clases\stb_image.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\1.-Empezando\1.10.-TrianguloVolteado\shader.fs" />
+    <None Include="src\1.-Empezando\1.10.-TrianguloVolteado\shader.vs" />
+    <None Include="src\1.-Empezando\1.11.-Desplazamiento\shader.fs" />
+    <None Include="src\1.-Empezando\1.11.-Desplazamiento\shader.vs" />
+    <None Include="src\1.-Empezando\1.12.-Posision\shader.fs" />
+    <None Include="src\1.-Empezando\1.12.-Posision\shader.vs" />
+    <None Include="src\1.-Empezando\1.13.-Texturas\shader.fs" />
+    <None Include="src\1.-Empezando\1.13.-Texturas\shader.vs" />
+    <None Include="src\1.-Empezando\1.14.-CombinarTexturas\shader.fs" />
+    <None Include="src\1.-Empezando\1.14.-CombinarTexturas\shader.vs" />
+    <None Include="src\1.-Empezando\1.9.-ClaseSombreador\shader.fs" />
+    <None Include="src\1.-Empezando\1.9.-ClaseSombreador\shader.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="texturas\container.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
