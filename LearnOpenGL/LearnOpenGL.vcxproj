@@ -154,6 +154,8 @@
     <ClCompile Include="src\1.-Empezando\1.18.-VariablesUniformes\variable_uniforme.cpp" />
     <ClCompile Include="src\1.-Empezando\1.19.-Transormaciones\transormaciones.cpp" />
     <ClCompile Include="src\1.-Empezando\1.2.-HolaTriangulo\hola_triangulo.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.20.-Ejercicio1\ejercicio1.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.21.-Ejercico2\ejercicio2.cpp" />
     <ClCompile Include="src\1.-Empezando\1.3.-Rectanculo\rectangulo.cpp" />
     <ClCompile Include="src\1.-Empezando\1.4.-DosTriangulos\dos_triangulos.cpp" />
     <ClCompile Include="src\1.-Empezando\1.5.-DosBuffers\dos_buffers.cpp" />
@@ -187,6 +189,10 @@
     <None Include="src\1.-Empezando\1.18.-VariablesUniformes\shader.vert" />
     <None Include="src\1.-Empezando\1.19.-Transormaciones\shader.frag" />
     <None Include="src\1.-Empezando\1.19.-Transormaciones\shader.vert" />
+    <None Include="src\1.-Empezando\1.20.-Ejercicio1\shader.frag" />
+    <None Include="src\1.-Empezando\1.20.-Ejercicio1\shader.vert" />
+    <None Include="src\1.-Empezando\1.21.-Ejercico2\shader.frag" />
+    <None Include="src\1.-Empezando\1.21.-Ejercico2\shader.vert" />
     <None Include="src\1.-Empezando\1.9.-ClaseSombreador\shader.fs" />
     <None Include="src\1.-Empezando\1.9.-ClaseSombreador\shader.vs" />
   </ItemGroup>

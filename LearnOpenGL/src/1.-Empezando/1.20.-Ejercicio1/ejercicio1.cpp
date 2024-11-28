@@ -35,7 +35,7 @@ int main() {
 		return -1;
 	}
 
-	Shader ourShader("./src/1.-Empezando/1.19.-Transormaciones/shader.vert", "./src/1.-Empezando/1.19.-Transormaciones/shader.frag");
+	Shader ourShader("./src/1.-Empezando/1.20.-Ejercicio1/shader.vert", "./src/1.-Empezando/1.20.-Ejercicio1/shader.frag");
 
 	float vertices[] = {
 		// Posision       , // Textura de cordenadas
@@ -121,8 +121,8 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glm::mat4 trans = glm::mat4(1.0f);
-		trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
 		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+		trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
 
 		unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform");
 		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));

@@ -81,6 +81,12 @@
     <ClCompile Include="src\1.-Empezando\1.19.-Transormaciones\transormaciones.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.20.-Ejercicio1\ejercicio1.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.21.-Ejercico2\ejercicio2.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shader.h">
@@ -113,6 +119,10 @@
     <None Include="src\1.-Empezando\1.18.-VariablesUniformes\shader.vert" />
     <None Include="src\1.-Empezando\1.19.-Transormaciones\shader.vert" />
     <None Include="src\1.-Empezando\1.19.-Transormaciones\shader.frag" />
+    <None Include="src\1.-Empezando\1.20.-Ejercicio1\shader.frag" />
+    <None Include="src\1.-Empezando\1.20.-Ejercicio1\shader.vert" />
+    <None Include="src\1.-Empezando\1.21.-Ejercico2\shader.frag" />
+    <None Include="src\1.-Empezando\1.21.-Ejercico2\shader.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\container.jpg">

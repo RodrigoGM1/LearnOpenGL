@@ -35,7 +35,7 @@ int main() {
 		return -1;
 	}
 
-	Shader ourShader("./src/1.-Empezando/1.19.-Transormaciones/shader.vert", "./src/1.-Empezando/1.19.-Transormaciones/shader.frag");
+	Shader ourShader("./src/1.-Empezando/1.21.-Ejercico2/shader.vert", "./src/1.-Empezando/1.21.-Ejercico2/shader.frag");
 
 	float vertices[] = {
 		// Posision       , // Textura de cordenadas
@@ -70,30 +70,30 @@ int main() {
 	unsigned int texture1, texture2;
 	stbi_set_flip_vertically_on_load(true);
 
-	glGenTextures(1, &texture1); // Se genera un objeto de tipo textura;
-	glBindTexture(GL_TEXTURE_2D, texture1); // Une una textura con nombre a un objetivo de texturizado
+	glGenTextures(1, &texture1);
+	glBindTexture(GL_TEXTURE_2D, texture1);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // Establecen parámetros de textura
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	int width, height, nrChannels;
-	unsigned char* data = stbi_load("./texturas/container.jpg", &width, &height, &nrChannels, 0); // Funcion nos permite cargar imagenes
+	unsigned char* data = stbi_load("./texturas/container.jpg", &width, &height, &nrChannels, 0); 
 	if (data) {
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data); // Especifica una imagen de textura bidimensional
-		glGenerateMipmap(GL_TEXTURE_2D); // Generan mapas mip para un objeto de textura específico
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D); 
 	}
 	else
 	{
 		std::cout << "Falla al cargar la imagen"<<std::endl;
 	}
-	stbi_image_free(data); // Se livera la memoria de la imagen
+	stbi_image_free(data);
 
 	glGenTextures(1, &texture2);
 	glBindTexture(GL_TEXTURE_2D, texture2);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	data = stbi_load("./texturas/awesomeface.png", &width, &height, &nrChannels, 0);
@@ -108,8 +108,8 @@ int main() {
 	stbi_image_free(data);
 
 	ourShader.use();
-	glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0);
-	ourShader.setInt("texture2", 1);
+	ourShader.setInt("texture1", 0);
+	ourShader.setInt("texture1", 1);
 
 	while (!glfwWindowShouldClose(window)) {
 		// Entradas
@@ -120,19 +120,28 @@ int main() {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glm::mat4 trans = glm::mat4(1.0f);
-		trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
-		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-
-		unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform");
-		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
-
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture1);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture2);
 
+		glm::mat4 transform = glm::mat4(1.0f);
+		
+		transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f));
+		transform = glm::rotate(transform, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+
+		unsigned int transformLoc = glGetUniformLocation(ourShader.ID,	"transform");
+		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
+
 		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+		transform = glm::mat4(1.0f);
+		transform = glm::translate(transform, glm::vec3(-0.5f, 0.5f, 0.0f));
+		float scaleAmoutn = static_cast<float>(sin(glfwGetTime()));
+		transform = glm::scale(transform, glm::vec3(scaleAmoutn, scaleAmoutn, scaleAmoutn));
+		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, &transform[0][0]);
+
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		// Llamada de eventos y intercambio de buffers
