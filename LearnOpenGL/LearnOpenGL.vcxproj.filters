@@ -66,6 +66,21 @@
     <ClCompile Include="src\1.-Empezando\1.14.-CombinarTexturas\texturas_combinadas.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.15.-CambiarCara\texturas_cambiar.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.16.-MetodosEnvoltura\metodos_envoltura.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.17.-PixelesCentrales\texturas_cambiar.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.18.-VariablesUniformes\variable_uniforme.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.19.-Transormaciones\transormaciones.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shader.h">
@@ -86,11 +101,24 @@
     <None Include="src\1.-Empezando\1.12.-Posision\shader.vs" />
     <None Include="src\1.-Empezando\1.13.-Texturas\shader.fs" />
     <None Include="src\1.-Empezando\1.13.-Texturas\shader.vs" />
-    <None Include="src\1.-Empezando\1.14.-CombinarTexturas\shader.fs" />
-    <None Include="src\1.-Empezando\1.14.-CombinarTexturas\shader.vs" />
+    <None Include="src\1.-Empezando\1.14.-CombinarTexturas\shader.frag" />
+    <None Include="src\1.-Empezando\1.14.-CombinarTexturas\shader.vert" />
+    <None Include="src\1.-Empezando\1.15.-CambiarCara\shader.frag" />
+    <None Include="src\1.-Empezando\1.15.-CambiarCara\shader.vert" />
+    <None Include="src\1.-Empezando\1.16.-MetodosEnvoltura\shader.frag" />
+    <None Include="src\1.-Empezando\1.16.-MetodosEnvoltura\shader.vert" />
+    <None Include="src\1.-Empezando\1.17.-PixelesCentrales\shader.frag" />
+    <None Include="src\1.-Empezando\1.17.-PixelesCentrales\shader.vert" />
+    <None Include="src\1.-Empezando\1.18.-VariablesUniformes\shader.frag" />
+    <None Include="src\1.-Empezando\1.18.-VariablesUniformes\shader.vert" />
+    <None Include="src\1.-Empezando\1.19.-Transormaciones\shader.vert" />
+    <None Include="src\1.-Empezando\1.19.-Transormaciones\shader.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\container.jpg">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\awesomeface.png">
       <Filter>Archivos de recursos</Filter>
     </Image>
   </ItemGroup>

@@ -1,3 +1,4 @@
+/*
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 
@@ -31,7 +32,7 @@ int main() {
 		return -1;
 	}
 
-	Shader ourShader("./src/1.-Empezando/1.14.-CombinarTexturas/shader.vs", "./src/1.-Empezando/1.14.-CombinarTexturas/shader.fs");
+	Shader ourShader("./src/1.-Empezando/1.14.-CombinarTexturas/shader.vert", "./src/1.-Empezando/1.14.-CombinarTexturas/shader.frag");
 
 	float vertices[] = {
 		// Posision          // colores           // Textura de cordenadas
@@ -65,9 +66,11 @@ int main() {
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 
-	unsigned int texture;
-	glGenTextures(1, &texture); // Se genera un objeto de tipo textura;
-	glBindTexture(GL_TEXTURE_2D, texture); // Une una textura con nombre a un objetivo de texturizado
+	unsigned int texture1, texture2;
+	stbi_set_flip_vertically_on_load(true);
+
+	glGenTextures(1, &texture1); // Se genera un objeto de tipo textura;
+	glBindTexture(GL_TEXTURE_2D, texture1); // Une una textura con nombre a un objetivo de texturizado
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
@@ -85,6 +88,28 @@ int main() {
 	}
 	stbi_image_free(data); // Se livera la memoria de la imagen
 
+	glGenTextures(1, &texture2);
+	glBindTexture(GL_TEXTURE_2D, texture2);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	data = stbi_load("./texturas/awesomeface.png", &width, &height, &nrChannels, 0);
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		std::cout << "Falla al cargar la imagen" << std::endl;
+	}
+	stbi_image_free(data);
+
+	ourShader.use();
+	glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0);
+	ourShader.setInt("texture2", 1);
+
 	while (!glfwWindowShouldClose(window)) {
 		// Entradas
 		processInput(window);
@@ -94,8 +119,11 @@ int main() {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		
-		ourShader.use();
-		glBindTexture(GL_TEXTURE_2D, texture);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture1);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, texture2);
+
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
@@ -121,3 +149,4 @@ void processInput(GLFWwindow* window) {
 		glfwSetWindowShouldClose(window, true);
 	}
 }
+*/

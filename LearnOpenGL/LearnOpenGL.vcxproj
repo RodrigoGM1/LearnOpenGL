@@ -148,6 +148,11 @@
     <ClCompile Include="src\1.-Empezando\1.12.-Posision\posision.cpp" />
     <ClCompile Include="src\1.-Empezando\1.13.-Texturas\texturas.cpp" />
     <ClCompile Include="src\1.-Empezando\1.14.-CombinarTexturas\texturas_combinadas.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.15.-CambiarCara\texturas_cambiar.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.16.-MetodosEnvoltura\metodos_envoltura.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.17.-PixelesCentrales\texturas_cambiar.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.18.-VariablesUniformes\variable_uniforme.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.19.-Transormaciones\transormaciones.cpp" />
     <ClCompile Include="src\1.-Empezando\1.2.-HolaTriangulo\hola_triangulo.cpp" />
     <ClCompile Include="src\1.-Empezando\1.3.-Rectanculo\rectangulo.cpp" />
     <ClCompile Include="src\1.-Empezando\1.4.-DosTriangulos\dos_triangulos.cpp" />
@@ -170,12 +175,23 @@
     <None Include="src\1.-Empezando\1.12.-Posision\shader.vs" />
     <None Include="src\1.-Empezando\1.13.-Texturas\shader.fs" />
     <None Include="src\1.-Empezando\1.13.-Texturas\shader.vs" />
-    <None Include="src\1.-Empezando\1.14.-CombinarTexturas\shader.fs" />
-    <None Include="src\1.-Empezando\1.14.-CombinarTexturas\shader.vs" />
+    <None Include="src\1.-Empezando\1.14.-CombinarTexturas\shader.frag" />
+    <None Include="src\1.-Empezando\1.14.-CombinarTexturas\shader.vert" />
+    <None Include="src\1.-Empezando\1.15.-CambiarCara\shader.frag" />
+    <None Include="src\1.-Empezando\1.15.-CambiarCara\shader.vert" />
+    <None Include="src\1.-Empezando\1.16.-MetodosEnvoltura\shader.frag" />
+    <None Include="src\1.-Empezando\1.16.-MetodosEnvoltura\shader.vert" />
+    <None Include="src\1.-Empezando\1.17.-PixelesCentrales\shader.frag" />
+    <None Include="src\1.-Empezando\1.17.-PixelesCentrales\shader.vert" />
+    <None Include="src\1.-Empezando\1.18.-VariablesUniformes\shader.frag" />
+    <None Include="src\1.-Empezando\1.18.-VariablesUniformes\shader.vert" />
+    <None Include="src\1.-Empezando\1.19.-Transormaciones\shader.frag" />
+    <None Include="src\1.-Empezando\1.19.-Transormaciones\shader.vert" />
     <None Include="src\1.-Empezando\1.9.-ClaseSombreador\shader.fs" />
     <None Include="src\1.-Empezando\1.9.-ClaseSombreador\shader.vs" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="texturas\awesomeface.png" />
     <Image Include="texturas\container.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
