@@ -78,7 +78,7 @@
     <ClCompile Include="src\1.-Empezando\1.18.-VariablesUniformes\variable_uniforme.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="src\1.-Empezando\1.19.-Transormaciones\transormaciones.cpp">
+    <ClCompile Include="src\1.-Empezando\1.19.-Transformaciones\transformaciones.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="src\1.-Empezando\1.20.-Ejercicio1\ejercicio1.cpp">
@@ -87,12 +87,36 @@
     <ClCompile Include="src\1.-Empezando\1.21.-Ejercico2\ejercicio2.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.22.-SisitemaCordenadas\sistemas_cordenadas.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.23.-MasCubos\mas_cubos.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.24.-MasCubosEjercicio\mas_cubos_ejercicio.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.25.-Camara\camara_a.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.26.-CamaraVuelta\camara_vuelta.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="clases\Camara.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\1.-Empezando\1.27.-ClassCamara\camara_class.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shader.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="clases\stb_image.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="clases\Camara.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -117,12 +141,24 @@
     <None Include="src\1.-Empezando\1.17.-PixelesCentrales\shader.vert" />
     <None Include="src\1.-Empezando\1.18.-VariablesUniformes\shader.frag" />
     <None Include="src\1.-Empezando\1.18.-VariablesUniformes\shader.vert" />
-    <None Include="src\1.-Empezando\1.19.-Transormaciones\shader.vert" />
-    <None Include="src\1.-Empezando\1.19.-Transormaciones\shader.frag" />
+    <None Include="src\1.-Empezando\1.19.-Transformaciones\shader.vert" />
+    <None Include="src\1.-Empezando\1.19.-Transformaciones\shader.frag" />
     <None Include="src\1.-Empezando\1.20.-Ejercicio1\shader.frag" />
     <None Include="src\1.-Empezando\1.20.-Ejercicio1\shader.vert" />
     <None Include="src\1.-Empezando\1.21.-Ejercico2\shader.frag" />
     <None Include="src\1.-Empezando\1.21.-Ejercico2\shader.vert" />
+    <None Include="src\1.-Empezando\1.22.-SisitemaCordenadas\shader.vert" />
+    <None Include="src\1.-Empezando\1.22.-SisitemaCordenadas\shader.frag" />
+    <None Include="src\1.-Empezando\1.23.-MasCubos\shader.frag" />
+    <None Include="src\1.-Empezando\1.23.-MasCubos\shader.vert" />
+    <None Include="src\1.-Empezando\1.24.-MasCubosEjercicio\shader.frag" />
+    <None Include="src\1.-Empezando\1.24.-MasCubosEjercicio\shader.vert" />
+    <None Include="src\1.-Empezando\1.25.-Camara\shader.frag" />
+    <None Include="src\1.-Empezando\1.25.-Camara\shader.vert" />
+    <None Include="src\1.-Empezando\1.26.-CamaraVuelta\shader.frag" />
+    <None Include="src\1.-Empezando\1.26.-CamaraVuelta\shader.vert" />
+    <None Include="src\1.-Empezando\1.27.-ClassCamara\shader.frag" />
+    <None Include="src\1.-Empezando\1.27.-ClassCamara\shader.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\container.jpg">
