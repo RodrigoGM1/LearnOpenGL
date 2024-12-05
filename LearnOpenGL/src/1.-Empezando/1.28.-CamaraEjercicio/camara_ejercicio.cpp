@@ -4,22 +4,12 @@
 
 #include<Shader.h>
 #include<stb_image.h>
-#include<Camara.h>
 
 #include<iostream>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
-void mouse_callback(GLFWwindow* window, double xpos, double ypos);
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
-
-Camara camara(glm::vec3(0.0f, 0.0f, 3.0f));
-float lastX = 800 / 2.0f;
-float lastY = 800 / 2.0f;
-bool firstMouse = true;
-
-float deltaTime = 0.0f;
-float lastFrame = 0.0f;
+glm::mat4 calculate_lookAt_matrix(glm::vec3 position, glm::vec3 targrt, glm::vec3 worldUp);
 
 int main() {
 	glfwInit();
@@ -36,9 +26,6 @@ int main() {
 
 	glfwMakeContextCurrent(window);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); // Esta función establece una opción de modo de entrada para la ventana especificada
-	glfwSetCursorPosCallback(window, mouse_callback); // Esta función establece la devolución de llamada de la posición del cursor de la ventana especificada, a la que se llama cuando se mueve el cursor.
-	glfwSetScrollCallback(window, scroll_callback);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 		std::cout << "No se pudo inicializar GLAD" << std::endl;
@@ -126,7 +113,7 @@ int main() {
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1); 
+	glEnableVertexAttribArray(1);
 
 	unsigned int texture1, texture2;
 	stbi_set_flip_vertically_on_load(true);
@@ -139,16 +126,16 @@ int main() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	int width, height, nrChannels;
-	unsigned char* data = stbi_load("./texturas/container.jpg", &width, &height, &nrChannels, 0); 
+	unsigned char* data = stbi_load("./texturas/container.jpg", &width, &height, &nrChannels, 0);
 	if (data) {
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data); 
-		glGenerateMipmap(GL_TEXTURE_2D); 
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
 	{
 		std::cout << "Falla al cargar la imagen"<<std::endl;
 	}
-	stbi_image_free(data); // Se livera la memoria de la imagen
+	stbi_image_free(data);
 
 	glGenTextures(1, &texture2);
 	glBindTexture(GL_TEXTURE_2D, texture2);
@@ -174,10 +161,6 @@ int main() {
 
 	while (!glfwWindowShouldClose(window)) {
 		// Entradas
-		float currentFrame = glfwGetTime();
-		deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame;
-
 		processInput(window);
 
 		// Comandos de renderizado aqui
@@ -192,13 +175,19 @@ int main() {
 
 		ourShader.use();
 
-		glm::mat4 projection = glm::perspective(glm::radians(camara.Zoom), 800.0f / 600.0f, 0.1f, 50.0f);
-		ourShader.setMat4("projection", projection);
+		glm::mat4 projection = glm::mat4(1.0f);
 
-		glm::mat4 view = camara.GetViewMatrix();
+		projection = glm::perspective(glm::radians(45.0f), (float)800 / (float)600, 0.1f, 100.0f);
+
+		const float radius = 10.0f;
+		float camX = sin(glfwGetTime()) * radius;
+		float camZ = cos(glfwGetTime()) * radius;
+		glm::mat4 view;
+		view = calculate_lookAt_matrix(glm::vec3(camX, 0.0f, camZ), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+		ourShader.setMat4("projection", projection);
 		ourShader.setMat4("view", view);
 
-		glBindVertexArray(VAO);
 		for (unsigned int i = 0; i < 10; i++) {
 			glm::mat4 model = glm::mat4(1.0f);
 			model = glm::translate(model, cubePositions[i]);
@@ -207,6 +196,8 @@ int main() {
 			ourShader.setMat4("model", model);
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
+
+		glBindVertexArray(VAO);
 
 		// Llamada de eventos y intercambio de buffers
 		glfwSwapBuffers(window);
@@ -226,44 +217,31 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 }
 
 void processInput(GLFWwindow* window) {
-	const float	 camaraSpeed = 2.5f * deltaTime;
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, true);
 	}
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-		camara.ProcessKeyboard(FORWARD, deltaTime);
-	}
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-		camara.ProcessKeyboard(BACKWARD, deltaTime);
-	}
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-		camara.ProcessKeyboard(LEFT, deltaTime);
-	}
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-		camara.ProcessKeyboard(RIGHT, deltaTime);
-	}
 }
 
-void mouse_callback(GLFWwindow* window, double xpos, double ypos)
-{
-	if (firstMouse) {
-		lastX = xpos;
-		lastY = ypos;
-		firstMouse = false;
-	}
+glm::mat4 calculate_lookAt_matrix(glm::vec3 position, glm::vec3 targrt, glm::vec3 worldUp) {
+	glm::vec3 zaxis = glm::normalize(position - targrt);
+	glm::vec3 xaxis = glm::normalize(glm::cross(glm::normalize(worldUp), zaxis));
+	glm::vec3 yaxis = glm::cross(zaxis, xaxis);
 
-	float xoffset = xpos - lastX;
-	float yoffset = lastY - ypos;
+	glm::mat4 traslation = glm::mat4(1.0f);
+	traslation[3][0] = -position.x;
+	traslation[3][1] = -position.y;
+	traslation[3][2] = -position.z;
+	glm::mat4 rotation = glm::mat4(1.0f);
+	rotation[0][0] = xaxis.x;
+	rotation[1][0] = xaxis.y;
+	rotation[2][0] = xaxis.z;
+	rotation[0][1] = yaxis.x;
+	rotation[1][1] = yaxis.y;
+	rotation[2][1] = yaxis.z;
+	rotation[0][2] = zaxis.x;
+	rotation[1][2] = zaxis.y;
+	rotation[2][2] = zaxis.z;
 
-	lastX = xpos;
-	lastY = ypos;
-	
-	camara.ProcessMouseMovement(xoffset, yoffset);
-
-}
-
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-{
-	camara.ProcessMouseScroll(yoffset);
+	return rotation * traslation;
 }
 */

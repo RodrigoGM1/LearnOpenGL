@@ -35,7 +35,7 @@ int main() {
 		return -1;
 	}
 
-	Shader ourShader("./src/1.-Empezando/1.19.-Transormaciones/shader.vert", "./src/1.-Empezando/1.19.-Transormaciones/shader.frag");
+	Shader ourShader("./src/1.-Empezando/1.19.-Transformaciones/shader.vert", "./src/1.-Empezando/1.19.-Transformaciones/shader.frag");
 
 	float vertices[] = {
 		// Posision       , // Textura de cordenadas

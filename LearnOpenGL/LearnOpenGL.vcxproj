@@ -149,9 +149,9 @@
     <ClCompile Include="src\1.-Empezando\1.12.-Posision\posision.cpp" />
     <ClCompile Include="src\1.-Empezando\1.13.-Texturas\texturas.cpp" />
     <ClCompile Include="src\1.-Empezando\1.14.-CombinarTexturas\texturas_combinadas.cpp" />
-    <ClCompile Include="src\1.-Empezando\1.15.-CambiarCara\texturas_cambiar.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.15.-CambiarCara\combinar_cara.cpp" />
     <ClCompile Include="src\1.-Empezando\1.16.-MetodosEnvoltura\metodos_envoltura.cpp" />
-    <ClCompile Include="src\1.-Empezando\1.17.-PixelesCentrales\texturas_cambiar.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.17.-PixelesCentrales\pixeles_centrales.cpp" />
     <ClCompile Include="src\1.-Empezando\1.18.-VariablesUniformes\variable_uniforme.cpp" />
     <ClCompile Include="src\1.-Empezando\1.19.-Transformaciones\transformaciones.cpp" />
     <ClCompile Include="src\1.-Empezando\1.2.-HolaTriangulo\hola_triangulo.cpp" />
@@ -163,6 +163,7 @@
     <ClCompile Include="src\1.-Empezando\1.25.-Camara\camara_a.cpp" />
     <ClCompile Include="src\1.-Empezando\1.26.-CamaraVuelta\camara_vuelta.cpp" />
     <ClCompile Include="src\1.-Empezando\1.27.-ClassCamara\camara_class.cpp" />
+    <ClCompile Include="src\1.-Empezando\1.28.-CamaraEjercicio\camara_ejercicio.cpp" />
     <ClCompile Include="src\1.-Empezando\1.3.-Rectanculo\rectangulo.cpp" />
     <ClCompile Include="src\1.-Empezando\1.4.-DosTriangulos\dos_triangulos.cpp" />
     <ClCompile Include="src\1.-Empezando\1.5.-DosBuffers\dos_buffers.cpp" />
@@ -170,6 +171,13 @@
     <ClCompile Include="src\1.-Empezando\1.7.-Sombreadores\sombreadores.cpp" />
     <ClCompile Include="src\1.-Empezando\1.8.-SombreadoColores\sombreador_color.cpp" />
     <ClCompile Include="src\1.-Empezando\1.9.-ClaseSombreador\class_sombreador.cpp" />
+    <ClCompile Include="src\2.-Iluminacion\2.1.-Color\color.cpp" />
+    <ClCompile Include="src\2.-Iluminacion\2.2.-IluminacionAmbiental\iluminacion_ambiental.cpp" />
+    <ClCompile Include="src\2.-Iluminacion\2.3.-IluminacionDifusa\iluminacion_difusa.cpp" />
+    <ClCompile Include="src\2.-Iluminacion\2.4.-IluminacionEspecular\iluminacion_especular.cpp" />
+    <ClCompile Include="src\2.-Iluminacion\2.5.-IluminacionEjercicio1\iluminacion_ejercicio1.cpp" />
+    <ClCompile Include="src\2.-Iluminacion\2.6.-IluminacionEjercicio2\iluminacion_ejercicio2.cpp" />
+    <ClCompile Include="src\2.-Iluminacion\2.7-IluminacionEjercicio3\iluminacion_ejercicio3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Camara.h" />
@@ -213,8 +221,38 @@
     <None Include="src\1.-Empezando\1.26.-CamaraVuelta\shader.vert" />
     <None Include="src\1.-Empezando\1.27.-ClassCamara\shader.frag" />
     <None Include="src\1.-Empezando\1.27.-ClassCamara\shader.vert" />
+    <None Include="src\1.-Empezando\1.28.-CamaraEjercicio\shader.frag" />
+    <None Include="src\1.-Empezando\1.28.-CamaraEjercicio\shader.vert" />
     <None Include="src\1.-Empezando\1.9.-ClaseSombreador\shader.fs" />
     <None Include="src\1.-Empezando\1.9.-ClaseSombreador\shader.vs" />
+    <None Include="src\2.-Iluminacion\2.1.-Color\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.1.-Color\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.1.-Color\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.1.-Color\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.2.-IluminacionAmbiental\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.2.-IluminacionAmbiental\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.2.-IluminacionAmbiental\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.2.-IluminacionAmbiental\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.3.-IluminacionDifusa\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.3.-IluminacionDifusa\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.3.-IluminacionDifusa\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.3.-IluminacionDifusa\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.4.-IluminacionEspecular\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.4.-IluminacionEspecular\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.4.-IluminacionEspecular\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.4.-IluminacionEspecular\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.5.-IluminacionEjercicio1\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.5.-IluminacionEjercicio1\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.5.-IluminacionEjercicio1\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.5.-IluminacionEjercicio1\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.6.-IluminacionEjercicio2\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.6.-IluminacionEjercicio2\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.6.-IluminacionEjercicio2\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.6.-IluminacionEjercicio2\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.7-IluminacionEjercicio3\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.7-IluminacionEjercicio3\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.7-IluminacionEjercicio3\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.7-IluminacionEjercicio3\luz.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\awesomeface.png" />
