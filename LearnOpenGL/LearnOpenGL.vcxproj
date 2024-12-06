@@ -178,6 +178,8 @@
     <ClCompile Include="src\2.-Iluminacion\2.5.-IluminacionEjercicio1\iluminacion_ejercicio1.cpp" />
     <ClCompile Include="src\2.-Iluminacion\2.6.-IluminacionEjercicio2\iluminacion_ejercicio2.cpp" />
     <ClCompile Include="src\2.-Iluminacion\2.7-IluminacionEjercicio3\iluminacion_ejercicio3.cpp" />
+    <ClCompile Include="src\2.-Iluminacion\2.8.-Materiales\materiales.cpp" />
+    <ClCompile Include="src\2.-Iluminacion\2.9.-MaterialEjercicio\materiales_ejercicio.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Camara.h" />
@@ -253,6 +255,14 @@
     <None Include="src\2.-Iluminacion\2.7-IluminacionEjercicio3\cubo.vert" />
     <None Include="src\2.-Iluminacion\2.7-IluminacionEjercicio3\luz.frag" />
     <None Include="src\2.-Iluminacion\2.7-IluminacionEjercicio3\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.8.-Materiales\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.8.-Materiales\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.8.-Materiales\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.8.-Materiales\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.9.-MaterialEjercicio\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.9.-MaterialEjercicio\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.9.-MaterialEjercicio\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.9.-MaterialEjercicio\luz.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\awesomeface.png" />

@@ -48,8 +48,8 @@ int main() {
 	}
 	glEnable(GL_DEPTH_TEST);
 
-	Shader lightingShader("./src/2.-Iluminacion/2.7-IluminacionEjercicio3/cubo.vert", "./src/2.-Iluminacion/2.7-IluminacionEjercicio3/cubo.frag");
-	Shader lightCubeShader("./src/2.-Iluminacion/2.7-IluminacionEjercicio3/luz.vert", "./src/2.-Iluminacion/2.7-IluminacionEjercicio3/luz.frag");
+	Shader lightingShader("./src/2.-Iluminacion/2.8.-Materiales/cubo.vert", "./src/2.-Iluminacion/2.8.-Materiales/cubo.frag");
+	Shader lightCubeShader("./src/2.-Iluminacion/2.8.-Materiales/luz.vert", "./src/2.-Iluminacion/2.8.-Materiales/luz.frag");
 
 	float vertices[] = {
 		  -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
@@ -133,11 +133,28 @@ int main() {
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		glm::vec3 lightColor;
+		lightColor.x = sin(glfwGetTime() * 2.0f);
+		lightColor.y = sin(glfwGetTime() * 0.7f);
+		lightColor.z = sin(glfwGetTime() * 1.3f);
+
+		glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f);
+		glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f);
+
 		lightingShader.use();
 		lightingShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
 		lightingShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
 		lightingShader.setVec3("lightPos", lightPos);
 		lightingShader.setVec3("viewPos", camara.Position);
+
+		lightingShader.setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
+		lightingShader.setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
+		lightingShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+		lightingShader.setFloat("material.shininess", 32.0f);
+
+		lightingShader.setVec3("light.ambient", ambientColor);
+		lightingShader.setVec3("light.diffuse", diffuseColor);
+		lightingShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 
 		glm::mat4 projection = glm::perspective(glm::radians(camara.Zoom), (float)800 / (float)600, 0.1f, 100.0f);
 		glm::mat4 view = camara.GetViewMatrix();

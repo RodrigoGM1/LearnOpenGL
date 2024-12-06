@@ -1,4 +1,3 @@
-/*
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 
@@ -48,8 +47,8 @@ int main() {
 	}
 	glEnable(GL_DEPTH_TEST);
 
-	Shader lightingShader("./src/2.-Iluminacion/2.7-IluminacionEjercicio3/cubo.vert", "./src/2.-Iluminacion/2.7-IluminacionEjercicio3/cubo.frag");
-	Shader lightCubeShader("./src/2.-Iluminacion/2.7-IluminacionEjercicio3/luz.vert", "./src/2.-Iluminacion/2.7-IluminacionEjercicio3/luz.frag");
+	Shader lightingShader("./src/2.-Iluminacion/2.9.-MaterialEjercicio/cubo.vert", "./src/2.-Iluminacion/2.9.-MaterialEjercicio/cubo.frag");
+	Shader lightCubeShader("./src/2.-Iluminacion/2.9.-MaterialEjercicio/luz.vert", "./src/2.-Iluminacion/2.9.-MaterialEjercicio/luz.frag");
 
 	float vertices[] = {
 		  -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
@@ -139,6 +138,16 @@ int main() {
 		lightingShader.setVec3("lightPos", lightPos);
 		lightingShader.setVec3("viewPos", camara.Position);
 
+		lightingShader.setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
+		lightingShader.setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
+		lightingShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+		lightingShader.setFloat("material.shininess", 32.0f);
+
+		lightingShader.setVec3("light.ambient", 0.19125f, 0.0735f, 0.0225f);
+		lightingShader.setVec3("light.diffuse", 0.7038, 0.27048f, 0.0828f);
+		lightingShader.setVec3("light.specular", 0.256777f, 0.137622f, 0.086014f);
+		lightingShader.setFloat("light.shininess", 32.0f);
+
 		glm::mat4 projection = glm::perspective(glm::radians(camara.Zoom), (float)800 / (float)600, 0.1f, 100.0f);
 		glm::mat4 view = camara.GetViewMatrix();
 		lightingShader.setMat4("projection", projection);
@@ -218,4 +227,3 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
 	camara.ProcessMouseScroll(yoffset);
 }
-*/

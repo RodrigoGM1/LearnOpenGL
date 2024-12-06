@@ -132,6 +132,12 @@
     <ClCompile Include="src\2.-Iluminacion\2.7-IluminacionEjercicio3\iluminacion_ejercicio3.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\2.-Iluminacion\2.8.-Materiales\materiales.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\2.-Iluminacion\2.9.-MaterialEjercicio\materiales_ejercicio.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shader.h">
@@ -213,6 +219,14 @@
     <None Include="src\2.-Iluminacion\2.7-IluminacionEjercicio3\cubo.vert" />
     <None Include="src\2.-Iluminacion\2.7-IluminacionEjercicio3\luz.frag" />
     <None Include="src\2.-Iluminacion\2.7-IluminacionEjercicio3\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.8.-Materiales\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.8.-Materiales\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.8.-Materiales\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.8.-Materiales\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.9.-MaterialEjercicio\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.9.-MaterialEjercicio\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.9.-MaterialEjercicio\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.9.-MaterialEjercicio\luz.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\container.jpg">
