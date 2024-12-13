@@ -172,6 +172,10 @@
     <ClCompile Include="src\1.-Empezando\1.8.-SombreadoColores\sombreador_color.cpp" />
     <ClCompile Include="src\1.-Empezando\1.9.-ClaseSombreador\class_sombreador.cpp" />
     <ClCompile Include="src\2.-Iluminacion\2.1.-Color\color.cpp" />
+    <ClCompile Include="src\2.-Iluminacion\2.10..-MapaIluminacion\mapa_iluminacion.cpp" />
+    <ClCompile Include="src\2.-Iluminacion\2.11.-MapaEspecular\mapa_especular.cpp" />
+    <ClCompile Include="src\2.-Iluminacion\2.12.-MapaEspecularEj1\mapa_especular_ejer1.cpp" />
+    <ClCompile Include="src\2.-Iluminacion\2.13.-MapaEspecularEj2\mapa_especular_ejer2.cpp" />
     <ClCompile Include="src\2.-Iluminacion\2.2.-IluminacionAmbiental\iluminacion_ambiental.cpp" />
     <ClCompile Include="src\2.-Iluminacion\2.3.-IluminacionDifusa\iluminacion_difusa.cpp" />
     <ClCompile Include="src\2.-Iluminacion\2.4.-IluminacionEspecular\iluminacion_especular.cpp" />
@@ -231,6 +235,22 @@
     <None Include="src\2.-Iluminacion\2.1.-Color\cubo.vert" />
     <None Include="src\2.-Iluminacion\2.1.-Color\luz.frag" />
     <None Include="src\2.-Iluminacion\2.1.-Color\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.10..-MapaIluminacion\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.10..-MapaIluminacion\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.10..-MapaIluminacion\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.10..-MapaIluminacion\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.11.-MapaEspecular\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.11.-MapaEspecular\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.11.-MapaEspecular\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.11.-MapaEspecular\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.12.-MapaEspecularEj1\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.12.-MapaEspecularEj1\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.12.-MapaEspecularEj1\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.12.-MapaEspecularEj1\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.13.-MapaEspecularEj2\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.13.-MapaEspecularEj2\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.13.-MapaEspecularEj2\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.13.-MapaEspecularEj2\luz.vert" />
     <None Include="src\2.-Iluminacion\2.2.-IluminacionAmbiental\cubo.frag" />
     <None Include="src\2.-Iluminacion\2.2.-IluminacionAmbiental\cubo.vert" />
     <None Include="src\2.-Iluminacion\2.2.-IluminacionAmbiental\luz.frag" />
@@ -267,6 +287,10 @@
   <ItemGroup>
     <Image Include="texturas\awesomeface.png" />
     <Image Include="texturas\container.jpg" />
+    <Image Include="texturas\container2.png" />
+    <Image Include="texturas\container2_specular.png" />
+    <Image Include="texturas\lighting_maps_specular_color.png" />
+    <Image Include="texturas\matrix.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

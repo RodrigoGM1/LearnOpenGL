@@ -138,6 +138,18 @@
     <ClCompile Include="src\2.-Iluminacion\2.9.-MaterialEjercicio\materiales_ejercicio.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\2.-Iluminacion\2.10..-MapaIluminacion\mapa_iluminacion.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\2.-Iluminacion\2.11.-MapaEspecular\mapa_especular.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\2.-Iluminacion\2.12.-MapaEspecularEj1\mapa_especular_ejer1.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\2.-Iluminacion\2.13.-MapaEspecularEj2\mapa_especular_ejer2.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shader.h">
@@ -227,12 +239,40 @@
     <None Include="src\2.-Iluminacion\2.9.-MaterialEjercicio\cubo.vert" />
     <None Include="src\2.-Iluminacion\2.9.-MaterialEjercicio\luz.frag" />
     <None Include="src\2.-Iluminacion\2.9.-MaterialEjercicio\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.10..-MapaIluminacion\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.10..-MapaIluminacion\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.10..-MapaIluminacion\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.10..-MapaIluminacion\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.11.-MapaEspecular\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.11.-MapaEspecular\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.11.-MapaEspecular\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.11.-MapaEspecular\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.12.-MapaEspecularEj1\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.12.-MapaEspecularEj1\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.12.-MapaEspecularEj1\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.12.-MapaEspecularEj1\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.13.-MapaEspecularEj2\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.13.-MapaEspecularEj2\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.13.-MapaEspecularEj2\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.13.-MapaEspecularEj2\luz.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\container.jpg">
       <Filter>Archivos de recursos</Filter>
     </Image>
     <Image Include="texturas\awesomeface.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\container2.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\container2_specular.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\lighting_maps_specular_color.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\matrix.jpg">
       <Filter>Archivos de recursos</Filter>
     </Image>
   </ItemGroup>
