@@ -49,8 +49,8 @@ int main() {
 	}
 	glEnable(GL_DEPTH_TEST);
 
-	Shader lightingShader("./src/2.-Iluminacion/2.13.-2.12.-MapaEspecularEj2/cubo.vert", "./src/2.-Iluminacion/2.13.-2.12.-MapaEspecularEj2/cubo.frag");
-	Shader lightCubeShader("./src/2.-Iluminacion/2.13.-2.12.-MapaEspecularEj2/luz.vert", "./src/2.-Iluminacion/2.13.-2.12.-MapaEspecularEj2/luz.frag");
+	Shader lightingShader("./src/2.-Iluminacion/2.16.-LuzFlash/cubo.vert", "./src/2.-Iluminacion/2.16.-LuzFlash/cubo.frag");
+	Shader lightCubeShader("./src/2.-Iluminacion/2.16.-LuzFlash/luz.vert", "./src/2.-Iluminacion/2.16.-LuzFlash/luz.frag");
 
 	float vertices[] = {
 		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
@@ -96,6 +96,19 @@ int main() {
 		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
 	};
 
+	glm::vec3 cubePositions[] = {
+		glm::vec3(0.0f,  0.0f,  0.0f),
+		glm::vec3(2.0f,  5.0f, -15.0f),
+		glm::vec3(-1.5f, -2.2f, -2.5f),
+		glm::vec3(-3.8f, -2.0f, -12.3f),
+		glm::vec3(2.4f, -0.4f, -3.5f),
+		glm::vec3(-1.7f,  3.0f, -7.5f),
+		glm::vec3(1.3f, -2.0f, -2.5f),
+		glm::vec3(1.5f,  2.0f, -2.5f),
+		glm::vec3(1.5f,  0.2f, -1.5f),
+		glm::vec3(-1.3f,  1.0f, -1.5f)
+	};
+
 	// Configuracion del primer cubo
 	unsigned int VBO, cubeVAO;
 	glGenVertexArrays(1, &cubeVAO);
@@ -126,7 +139,7 @@ int main() {
 	glEnableVertexAttribArray(0);
 
 	unsigned int diffuseMap = cargarImagen("./texturas/container2.png");
-	unsigned int specularMap = cargarImagen("./texturas/lighting_maps_specular_color.png");
+	unsigned int specularMap = cargarImagen("./texturas/container2_specular.png");
 
 	lightingShader.use();
 	lightingShader.setInt("material.diffuse", 0);
@@ -153,9 +166,11 @@ int main() {
 		lightingShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
 		lightingShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
 		lightingShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+		lightingShader.setFloat("light.constant", 1.0f);
+		lightingShader.setFloat("light.linear", 0.09f);
+		lightingShader.setFloat("light.quadratic", 0.032f);
 
-		lightingShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
-		lightingShader.setFloat("material.shininess", 64.0f);
+		lightingShader.setFloat("material.shininess", 32.0f);
 
 
 		glm::mat4 projection = glm::perspective(glm::radians(camara.Zoom), (float)800 / (float)600, 0.1f, 100.0f);
@@ -173,7 +188,14 @@ int main() {
 		glBindTexture(GL_TEXTURE_2D, specularMap);
 
 		glBindVertexArray(cubeVAO);
-		glDrawArrays(GL_TRIANGLES, 0 ,36);
+		for (unsigned int i = 0; i < 10; i++) {
+			glm::mat4 model = glm::mat4(1.0f);
+			model = glm::translate(model, cubePositions[i]);
+			float angle = 20 * i;
+			model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+			lightingShader.setMat4("model", model);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+		}
 
 		lightCubeShader.use();
 		lightCubeShader.setMat4("projection", projection);

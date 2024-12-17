@@ -10,7 +10,7 @@
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
-void mouse_callback(GLFWwindow* window, double xposIn, double yposIn);
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 unsigned int cargarImagen(const char *path);
 
@@ -22,7 +22,7 @@ bool firstMouse = true;
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
-glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+glm::vec3 lightPos(-0.2f, -1.0f, -0.3f);
 
 int main() {
 	glfwInit();
@@ -49,8 +49,8 @@ int main() {
 	}
 	glEnable(GL_DEPTH_TEST);
 
-	Shader lightingShader("./src/2.-Iluminacion/2.13.-2.12.-MapaEspecularEj2/cubo.vert", "./src/2.-Iluminacion/2.13.-2.12.-MapaEspecularEj2/cubo.frag");
-	Shader lightCubeShader("./src/2.-Iluminacion/2.13.-2.12.-MapaEspecularEj2/luz.vert", "./src/2.-Iluminacion/2.13.-2.12.-MapaEspecularEj2/luz.frag");
+	Shader lightingShader("./src/2.-Iluminacion/2.14.-LuzDirecional/cubo.vert", "./src/2.-Iluminacion/2.14.-LuzDirecional/cubo.frag");
+	Shader lightCubeShader("./src/2.-Iluminacion/2.14.-LuzDirecional/luz.vert", "./src/2.-Iluminacion/2.14.-LuzDirecional/luz.frag");
 
 	float vertices[] = {
 		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
@@ -96,6 +96,19 @@ int main() {
 		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
 	};
 
+	glm::vec3 cubePositions[] = {
+		glm::vec3(0.0f,  0.0f,  0.0f),
+		glm::vec3(2.0f,  5.0f, -15.0f),
+		glm::vec3(-1.5f, -2.2f, -2.5f),
+		glm::vec3(-3.8f, -2.0f, -12.3f),
+		glm::vec3(2.4f, -0.4f, -3.5f),
+		glm::vec3(-1.7f,  3.0f, -7.5f),
+		glm::vec3(1.3f, -2.0f, -2.5f),
+		glm::vec3(1.5f,  2.0f, -2.5f),
+		glm::vec3(1.5f,  0.2f, -1.5f),
+		glm::vec3(-1.3f,  1.0f, -1.5f)
+	};
+
 	// Configuracion del primer cubo
 	unsigned int VBO, cubeVAO;
 	glGenVertexArrays(1, &cubeVAO);
@@ -126,17 +139,15 @@ int main() {
 	glEnableVertexAttribArray(0);
 
 	unsigned int diffuseMap = cargarImagen("./texturas/container2.png");
-	unsigned int specularMap = cargarImagen("./texturas/lighting_maps_specular_color.png");
 
 	lightingShader.use();
 	lightingShader.setInt("material.diffuse", 0);
-	lightingShader.setInt("material.specular", 1);
 
 
 
 	while (!glfwWindowShouldClose(window)) {
 		// Entradas
-		float currentFrame = (float)glfwGetTime();
+		float currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
@@ -147,7 +158,7 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		lightingShader.use();
-		lightingShader.setVec3("lightPos", lightPos);
+		lightingShader.setVec3("light.direction", lightPos);
 		lightingShader.setVec3("viewPos", camara.Position);
 
 		lightingShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
@@ -163,28 +174,30 @@ int main() {
 		lightingShader.setMat4("projection", projection);
 		lightingShader.setMat4("view", view);
 
-		glm::mat4 model = glm::mat4(1.0f);
-		lightingShader.setMat4("model", model);
+		for (unsigned int i = 0; i < 10; i++) {
+			glm::mat4 model = glm::mat4(1.0f);
+			model = glm::translate(model, cubePositions[i]);
+			float angle = 20 * i;
+			model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+			lightingShader.setMat4("model", model);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+		}
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, diffuseMap);
 
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, specularMap);
-
 		glBindVertexArray(cubeVAO);
-		glDrawArrays(GL_TRIANGLES, 0 ,36);
 
-		lightCubeShader.use();
-		lightCubeShader.setMat4("projection", projection);
-		lightCubeShader.setMat4("view", view);
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, lightPos);
-		model = glm::scale(model, glm::vec3(0.2f));
-		lightCubeShader.setMat4("model", model);
+		//lightCubeShader.use();
+		//lightCubeShader.setMat4("projection", projection);
+		//lightCubeShader.setMat4("view", view);
+		//model = glm::mat4(1.0f);
+		//model = glm::translate(model, lightPos);
+		//model = glm::scale(model, glm::vec3(0.2));
+		//lightCubeShader.setMat4("model", model);
 
-		glBindVertexArray(lightCubeVAO);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		//glBindVertexArray(lightCubeVAO);
+		//glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		// Llamada de eventos y intercambio de buffers
 		glfwSwapBuffers(window);
@@ -221,11 +234,8 @@ void processInput(GLFWwindow* window) {
 	}
 }
 
-void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
+void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
-	float xpos = (float)xposIn;
-	float ypos = (float)yposIn;
-
 	if (firstMouse) {
 		lastX = xpos;
 		lastY = ypos;
@@ -244,7 +254,7 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-	camara.ProcessMouseScroll((float)yoffset);
+	camara.ProcessMouseScroll(yoffset);
 }
 
 unsigned int cargarImagen(const char* path) {
