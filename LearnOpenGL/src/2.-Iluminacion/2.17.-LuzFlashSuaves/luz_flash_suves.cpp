@@ -49,8 +49,8 @@ int main() {
 	}
 	glEnable(GL_DEPTH_TEST);
 
-	Shader lightingShader("./src/2.-Iluminacion/2.16.-LuzFlash/cubo.vert", "./src/2.-Iluminacion/2.16.-LuzFlash/cubo.frag");
-	Shader lightCubeShader("./src/2.-Iluminacion/2.16.-LuzFlash/luz.vert", "./src/2.-Iluminacion/2.16.-LuzFlash/luz.frag");
+	Shader lightingShader("./src/2.-Iluminacion/2.17.-LuzFlashSuaves/cubo.vert", "./src/2.-Iluminacion/2.17.-LuzFlashSuaves/cubo.frag");
+	Shader lightCubeShader("./src/2.-Iluminacion/2.17.-LuzFlashSuaves/luz.vert", "./src/2.-Iluminacion/2.17.-LuzFlashSuaves/luz.frag");
 
 	float vertices[] = {
 		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
@@ -163,6 +163,7 @@ int main() {
 		lightingShader.setVec3("light.position", camara.Position);
 		lightingShader.setVec3("light.direction", camara.Front);
 		lightingShader.setFloat("light.cutOff", glm::cos(glm::radians(12.5f)));
+		lightingShader.setFloat("light.outerCutOff", glm::cos(glm::radians(17.5f)));
 		lightingShader.setVec3("viewPos", camara.Position);
 
 		lightingShader.setVec3("light.ambient", 0.1f, 0.1f, 0.1f);

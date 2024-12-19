@@ -159,6 +159,15 @@
     <ClCompile Include="src\2.-Iluminacion\2.16.-LuzFlash\luz_flash.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\2.-Iluminacion\2.17.-LuzFlashSuaves\luz_flash_suves.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\2.-Iluminacion\2.18.-LucesMultiples\luces_multiples.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\2.-Iluminacion\2.19.-LucesMultiplesEjercicio\luces_multiples_ejercicio.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shader.h">
@@ -268,14 +277,26 @@
     <None Include="src\2.-Iluminacion\2.14.-LuzDirecional\luz.frag" />
     <None Include="src\2.-Iluminacion\2.14.-LuzDirecional\cubo.vert" />
     <None Include="src\2.-Iluminacion\2.14.-LuzDirecional\cubo.frag" />
-    <None Include="src\2.-Iluminacion\2.15.-LuzPuntual\luz.vert" />
-    <None Include="src\2.-Iluminacion\2.15.-LuzPuntual\luz.frag" />
-    <None Include="src\2.-Iluminacion\2.15.-LuzPuntual\cubo.vert" />
     <None Include="src\2.-Iluminacion\2.15.-LuzPuntual\cubo.frag" />
-    <None Include="src\2.-Iluminacion\2.16.-LuzFlash\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.15.-LuzPuntual\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.15.-LuzPuntual\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.15.-LuzPuntual\luz.vert" />
     <None Include="src\2.-Iluminacion\2.16.-LuzFlash\cubo.frag" />
     <None Include="src\2.-Iluminacion\2.16.-LuzFlash\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.16.-LuzFlash\cubo.vert" />
     <None Include="src\2.-Iluminacion\2.16.-LuzFlash\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.17.-LuzFlashSuaves\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.17.-LuzFlashSuaves\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.17.-LuzFlashSuaves\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.17.-LuzFlashSuaves\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.18.-LucesMultiples\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.18.-LucesMultiples\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.18.-LucesMultiples\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.18.-LucesMultiples\cubo.frag" />
+    <None Include="src\2.-Iluminacion\2.19.-LucesMultiplesEjercicio\luz.vert" />
+    <None Include="src\2.-Iluminacion\2.19.-LucesMultiplesEjercicio\luz.frag" />
+    <None Include="src\2.-Iluminacion\2.19.-LucesMultiplesEjercicio\cubo.vert" />
+    <None Include="src\2.-Iluminacion\2.19.-LucesMultiplesEjercicio\cubo.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\container.jpg">
