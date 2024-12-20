@@ -168,6 +168,15 @@
     <ClCompile Include="src\2.-Iluminacion\2.19.-LucesMultiplesEjercicio\luces_multiples_ejercicio.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="clases\Mesh.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\3.-CargaModelo\3.1.-Assimp\modelo.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="clases\Model.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shader.h">
@@ -177,6 +186,12 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="clases\Camara.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="clases\Mesh.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="clases\Model.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -297,6 +312,7 @@
     <None Include="src\2.-Iluminacion\2.19.-LucesMultiplesEjercicio\luz.frag" />
     <None Include="src\2.-Iluminacion\2.19.-LucesMultiplesEjercicio\cubo.vert" />
     <None Include="src\2.-Iluminacion\2.19.-LucesMultiplesEjercicio\cubo.frag" />
+    <None Include="assimp-vc143-mtd.dll" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\container.jpg">
