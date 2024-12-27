@@ -177,6 +177,24 @@
     <ClCompile Include="clases\Model.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.1.-PruebaProfundidad\pruebas_profundiad.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.2.-StencilTesting\stencil_testing.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.3.-Mezcla\descarte.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.4.-MezclaDos\mezcla.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.5.-FaceCalling\face_calling.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.6.-BufferCuadros\buffer_cuadros.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shader.h">
@@ -316,6 +334,19 @@
     <None Include="objetos\backpack\backpack.mtl" />
     <None Include="src\3.-CargaModelo\3.1.-Assimp\modelo.vert" />
     <None Include="src\3.-CargaModelo\3.1.-Assimp\modelo.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.1.-PruebaProfundidad\profundidad.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.1.-PruebaProfundidad\profundidad.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.2.-StencilTesting\profundidad.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.2.-StencilTesting\profundidad.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.2.-StencilTesting\shaderSingleColor.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.3.-Mezcla\mezcla.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.3.-Mezcla\mezcla.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.4.-MezclaDos\mezcla.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.4.-MezclaDos\mezcla.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.5.-FaceCalling\calling.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.5.-FaceCalling\calling.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.6.-BufferCuadros\mezcla.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.6.-BufferCuadros\mezcla.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\container.jpg">
@@ -349,6 +380,18 @@
       <Filter>Archivos de recursos</Filter>
     </Image>
     <Image Include="objetos\backpack\specular.jpg">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\marble.jpg">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\metal.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\grass.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\blending_transparent_window.png">
       <Filter>Archivos de recursos</Filter>
     </Image>
   </ItemGroup>

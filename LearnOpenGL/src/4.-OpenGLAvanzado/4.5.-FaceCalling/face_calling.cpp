@@ -2,17 +2,20 @@
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 
+#include<stb_image.h>
+
 #include<Shader.h>
-#include<Model.h>
 #include<Camara.h>
 
 #include<iostream>
+#include<vector>
+#include<map>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
-unsigned int cargarImagen(const char *path);
+unsigned int cargarImagen(const char* path);
 
 Camara camara(glm::vec3(0.0f, 0.0f, 3.0f));
 float lastX = 800 / 2.0f;
@@ -47,13 +50,71 @@ int main() {
 		std::cout << "No se pudo inicializar GLAD" << std::endl;
 		return -1;
 	}
-	stbi_set_flip_vertically_on_load(true);
 
-	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_FRONT);
+	glFrontFace(GL_CW);
 
-	Shader ourShader("./src/3.-CargaModelo/3.1.-Assimp/modelo.vert", "./src/3.-CargaModelo/3.1.-Assimp/modelo.frag");
+	Shader shader("./src/4.-OpenGLAvanzado/4.5.-FaceCalling/calling.vert", "./src/4.-OpenGLAvanzado/4.5.-FaceCalling/calling.frag");
+	
+	float cubeVertices[] = {
+		// Back face
+		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // Bottom-left
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-right
+		 0.5f, -0.5f, -0.5f,  1.0f, 0.0f, // bottom-right         
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-right
+		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // bottom-left
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // top-left
+		// Front face
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-left
+		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // bottom-right
+		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // top-right
+		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // top-right
+		-0.5f,  0.5f,  0.5f,  0.0f, 1.0f, // top-left
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-left
+		// Left face
+		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // top-right
+		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-left
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // bottom-left
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // bottom-left
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-right
+		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // top-right
+		// Right face
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // top-left
+		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // bottom-right
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-right         
+		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // bottom-right
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // top-left
+		 0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-left     
+		 // Bottom face
+		 -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // top-right
+		  0.5f, -0.5f, -0.5f,  1.0f, 1.0f, // top-left
+		  0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // bottom-left
+		  0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // bottom-left
+		 -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-right
+		 -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // top-right
+		 // Top face
+		 -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // top-left
+		  0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // bottom-right
+		  0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-right     
+		  0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // bottom-right
+		 -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // top-left
+		 -0.5f,  0.5f,  0.5f,  0.0f, 0.0f  // bottom-left        
+	};
 
-	Model ourModel("./objetos/backpack/backpack.obj");
+	unsigned int cubeVAO, cubeVBO;
+	glGenVertexArrays(1, &cubeVAO);
+	glGenBuffers(1, &cubeVBO);
+	glBindVertexArray(cubeVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), &cubeVertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glBindVertexArray(0);
+
+	unsigned int imagen = cargarImagen("./texturas/container2.png");
 
 	while (!glfwWindowShouldClose(window)) {
 		// Entradas
@@ -67,18 +128,19 @@ int main() {
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		ourShader.use();
-
-		glm::mat4 projection = glm::perspective(glm::radians(camara.Zoom), (float)800 / (float)600, 0.1f, 100.0f);
-		glm::mat4 view = camara.GetViewMatrix();
-		ourShader.setMat4("projection", projection);
-		ourShader.setMat4("view", view);
-
+		shader.use();
 		glm::mat4 model = glm::mat4(1.0f);
+		glm::mat4 view = camara.GetViewMatrix();
+		glm::mat4 projection = glm::perspective(glm::radians(camara.Zoom), (float)800 / (float)600, 0.1f, 100.0f);
+		shader.setMat4("view", view);
+		shader.setMat4("projection", projection);
+
+		glBindVertexArray(cubeVAO);
+		glActiveTexture(GL_TEXTURE);
+		glBindTexture(GL_TEXTURE_2D, imagen);
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
-		ourShader.setMat4("model", model);
-		ourModel.Draw(ourShader);
+		shader.setMat4("model", model);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
