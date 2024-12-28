@@ -195,6 +195,9 @@
     <ClCompile Include="src\4.-OpenGLAvanzado\4.6.-BufferCuadros\buffer_cuadros.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.7.-BufferCuadrosEjercicio\buffer_cuadros_ejercicio.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shader.h">
@@ -345,8 +348,14 @@
     <None Include="src\4.-OpenGLAvanzado\4.4.-MezclaDos\mezcla.vert" />
     <None Include="src\4.-OpenGLAvanzado\4.5.-FaceCalling\calling.frag" />
     <None Include="src\4.-OpenGLAvanzado\4.5.-FaceCalling\calling.vert" />
-    <None Include="src\4.-OpenGLAvanzado\4.6.-BufferCuadros\mezcla.frag" />
-    <None Include="src\4.-OpenGLAvanzado\4.6.-BufferCuadros\mezcla.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.6.-BufferCuadros\framebuffer.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.6.-BufferCuadros\framebuffer.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.6.-BufferCuadros\framebuffer_screen.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.6.-BufferCuadros\framebuffer_screen.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.7.-BufferCuadrosEjercicio\framebuffer.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.7.-BufferCuadrosEjercicio\framebuffer.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.7.-BufferCuadrosEjercicio\framebuffer_screen.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.7.-BufferCuadrosEjercicio\framebuffer_screen.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\container.jpg">
