@@ -198,6 +198,24 @@
     <ClCompile Include="src\4.-OpenGLAvanzado\4.7.-BufferCuadrosEjercicio\buffer_cuadros_ejercicio.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.8.-CubeMaps\maps_cubicos.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.9.-CubeMapsReflexion\maps_cubicos_reflexion.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.10.-CubeMapsRefraccion\maps_cubicos_reflexion.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.11.-GLSLavanzado\GLSL_avanzado.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.12.-GLSLavanzadoEjemplo\GLSL_avanzado_ejemplo.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.13.-SombreadorGeometria\sombreador_geometry.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shader.h">
@@ -356,6 +374,28 @@
     <None Include="src\4.-OpenGLAvanzado\4.7.-BufferCuadrosEjercicio\framebuffer.vert" />
     <None Include="src\4.-OpenGLAvanzado\4.7.-BufferCuadrosEjercicio\framebuffer_screen.frag" />
     <None Include="src\4.-OpenGLAvanzado\4.7.-BufferCuadrosEjercicio\framebuffer_screen.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.8.-CubeMaps\cubo.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.8.-CubeMaps\cubo.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.8.-CubeMaps\skybox.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.8.-CubeMaps\skybox.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.9.-CubeMapsReflexion\cubo.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.9.-CubeMapsReflexion\cubo.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.9.-CubeMapsReflexion\skybox.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.9.-CubeMapsReflexion\skybox.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.10.-CubeMapsRefraccion\cubo.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.10.-CubeMapsRefraccion\cubo.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.10.-CubeMapsRefraccion\skybox.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.10.-CubeMapsRefraccion\skybox.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.11.-GLSLavanzado\calling.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.11.-GLSLavanzado\calling.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.12.-GLSLavanzadoEjemplo\rojo.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.12.-GLSLavanzadoEjemplo\glsl_ejm.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.12.-GLSLavanzadoEjemplo\verde.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.12.-GLSLavanzadoEjemplo\azul.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.12.-GLSLavanzadoEjemplo\amarillo.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.13.-SombreadorGeometria\geometry.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.13.-SombreadorGeometria\geometry.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.13.-SombreadorGeometria\geometry.geom" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\container.jpg">
@@ -401,6 +441,24 @@
       <Filter>Archivos de recursos</Filter>
     </Image>
     <Image Include="texturas\blending_transparent_window.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\skyboxPrueba\skybox1\1.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\skyboxPrueba\skybox1\2.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\skyboxPrueba\skybox1\3.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\skyboxPrueba\skybox1\4.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\skyboxPrueba\skybox1\5.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\skyboxPrueba\skybox1\6.png">
       <Filter>Archivos de recursos</Filter>
     </Image>
   </ItemGroup>

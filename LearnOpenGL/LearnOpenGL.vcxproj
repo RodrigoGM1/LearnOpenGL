@@ -196,12 +196,18 @@
     <ClCompile Include="src\2.-Iluminacion\2.9.-MaterialEjercicio\materiales_ejercicio.cpp" />
     <ClCompile Include="src\3.-CargaModelo\3.1.-Assimp\modelo.cpp" />
     <ClCompile Include="src\4.-OpenGLAvanzado\4.1.-PruebaProfundidad\pruebas_profundiad.cpp" />
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.10.-CubeMapsRefraccion\maps_cubicos_reflexion.cpp" />
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.11.-GLSLavanzado\GLSL_avanzado.cpp" />
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.12.-GLSLavanzadoEjemplo\GLSL_avanzado_ejemplo.cpp" />
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.13.-SombreadorGeometria\sombreador_geometry.cpp" />
     <ClCompile Include="src\4.-OpenGLAvanzado\4.2.-StencilTesting\stencil_testing.cpp" />
     <ClCompile Include="src\4.-OpenGLAvanzado\4.3.-Mezcla\descarte.cpp" />
     <ClCompile Include="src\4.-OpenGLAvanzado\4.4.-MezclaDos\mezcla.cpp" />
     <ClCompile Include="src\4.-OpenGLAvanzado\4.5.-FaceCalling\face_calling.cpp" />
     <ClCompile Include="src\4.-OpenGLAvanzado\4.6.-BufferCuadros\buffer_cuadros.cpp" />
     <ClCompile Include="src\4.-OpenGLAvanzado\4.7.-BufferCuadrosEjercicio\buffer_cuadros_ejercicio.cpp" />
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.8.-CubeMaps\maps_cubicos.cpp" />
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.9.-CubeMapsReflexion\maps_cubicos_reflexion.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Camara.h" />
@@ -333,6 +339,20 @@
     <None Include="src\3.-CargaModelo\3.1.-Assimp\modelo.vert" />
     <None Include="src\4.-OpenGLAvanzado\4.1.-PruebaProfundidad\profundidad.frag" />
     <None Include="src\4.-OpenGLAvanzado\4.1.-PruebaProfundidad\profundidad.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.10.-CubeMapsRefraccion\cubo.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.10.-CubeMapsRefraccion\cubo.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.10.-CubeMapsRefraccion\skybox.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.10.-CubeMapsRefraccion\skybox.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.11.-GLSLavanzado\calling.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.11.-GLSLavanzado\calling.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.12.-GLSLavanzadoEjemplo\amarillo.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.12.-GLSLavanzadoEjemplo\azul.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.12.-GLSLavanzadoEjemplo\rojo.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.12.-GLSLavanzadoEjemplo\glsl_ejm.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.12.-GLSLavanzadoEjemplo\verde.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.13.-SombreadorGeometria\geometry.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.13.-SombreadorGeometria\geometry.geom" />
+    <None Include="src\4.-OpenGLAvanzado\4.13.-SombreadorGeometria\geometry.vert" />
     <None Include="src\4.-OpenGLAvanzado\4.2.-StencilTesting\profundidad.frag" />
     <None Include="src\4.-OpenGLAvanzado\4.2.-StencilTesting\profundidad.vert" />
     <None Include="src\4.-OpenGLAvanzado\4.2.-StencilTesting\shaderSingleColor.frag" />
@@ -350,6 +370,14 @@
     <None Include="src\4.-OpenGLAvanzado\4.7.-BufferCuadrosEjercicio\framebuffer.vert" />
     <None Include="src\4.-OpenGLAvanzado\4.7.-BufferCuadrosEjercicio\framebuffer_screen.frag" />
     <None Include="src\4.-OpenGLAvanzado\4.7.-BufferCuadrosEjercicio\framebuffer_screen.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.8.-CubeMaps\cubo.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.8.-CubeMaps\cubo.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.8.-CubeMaps\skybox.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.8.-CubeMaps\skybox.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.9.-CubeMapsReflexion\cubo.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.9.-CubeMapsReflexion\cubo.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.9.-CubeMapsReflexion\skybox.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.9.-CubeMapsReflexion\skybox.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="objetos\backpack\ao.jpg" />
@@ -367,6 +395,12 @@
     <Image Include="texturas\marble.jpg" />
     <Image Include="texturas\matrix.jpg" />
     <Image Include="texturas\metal.png" />
+    <Image Include="texturas\skyboxPrueba\skybox1\1.png" />
+    <Image Include="texturas\skyboxPrueba\skybox1\2.png" />
+    <Image Include="texturas\skyboxPrueba\skybox1\3.png" />
+    <Image Include="texturas\skyboxPrueba\skybox1\4.png" />
+    <Image Include="texturas\skyboxPrueba\skybox1\5.png" />
+    <Image Include="texturas\skyboxPrueba\skybox1\6.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="objetos\backpack\source_attribution.txt" />
