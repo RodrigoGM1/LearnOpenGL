@@ -216,6 +216,9 @@
     <ClCompile Include="src\4.-OpenGLAvanzado\4.13.-SombreadorGeometria\sombreador_geometry.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.14.-ObjetosExplosivos\modelo_explocion.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shader.h">
@@ -396,6 +399,9 @@
     <None Include="src\4.-OpenGLAvanzado\4.13.-SombreadorGeometria\geometry.vert" />
     <None Include="src\4.-OpenGLAvanzado\4.13.-SombreadorGeometria\geometry.frag" />
     <None Include="src\4.-OpenGLAvanzado\4.13.-SombreadorGeometria\geometry.geom" />
+    <None Include="src\4.-OpenGLAvanzado\4.14.-ObjetosExplosivos\modelo.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.14.-ObjetosExplosivos\modelo.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.14.-ObjetosExplosivos\modelo.geom" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\container.jpg">

@@ -200,6 +200,7 @@
     <ClCompile Include="src\4.-OpenGLAvanzado\4.11.-GLSLavanzado\GLSL_avanzado.cpp" />
     <ClCompile Include="src\4.-OpenGLAvanzado\4.12.-GLSLavanzadoEjemplo\GLSL_avanzado_ejemplo.cpp" />
     <ClCompile Include="src\4.-OpenGLAvanzado\4.13.-SombreadorGeometria\sombreador_geometry.cpp" />
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.14.-ObjetosExplosivos\modelo_explocion.cpp" />
     <ClCompile Include="src\4.-OpenGLAvanzado\4.2.-StencilTesting\stencil_testing.cpp" />
     <ClCompile Include="src\4.-OpenGLAvanzado\4.3.-Mezcla\descarte.cpp" />
     <ClCompile Include="src\4.-OpenGLAvanzado\4.4.-MezclaDos\mezcla.cpp" />
@@ -353,6 +354,9 @@
     <None Include="src\4.-OpenGLAvanzado\4.13.-SombreadorGeometria\geometry.frag" />
     <None Include="src\4.-OpenGLAvanzado\4.13.-SombreadorGeometria\geometry.geom" />
     <None Include="src\4.-OpenGLAvanzado\4.13.-SombreadorGeometria\geometry.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.14.-ObjetosExplosivos\modelo.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.14.-ObjetosExplosivos\modelo.geom" />
+    <None Include="src\4.-OpenGLAvanzado\4.14.-ObjetosExplosivos\modelo.vert" />
     <None Include="src\4.-OpenGLAvanzado\4.2.-StencilTesting\profundidad.frag" />
     <None Include="src\4.-OpenGLAvanzado\4.2.-StencilTesting\profundidad.vert" />
     <None Include="src\4.-OpenGLAvanzado\4.2.-StencilTesting\shaderSingleColor.frag" />
