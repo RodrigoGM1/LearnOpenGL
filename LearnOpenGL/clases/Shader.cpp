@@ -1,14 +1,19 @@
 #include "Shader.h"
 
-Shader::Shader(const char* vertexPath, const char* fragmentPath)
+Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath)
 {
 	std::string vertexCode;
 	std::string fragmentCode; // Cadena basica de caracteres char
 	std::ifstream vShaderFile;
 	std::ifstream fShaderFile; // Clase de flujo de entrada para operar en archivos operaciones de entrada/salida en el archivo al que están asociados.
 
+	std::string geometryCode;
+	std::ifstream gShaderFile;
+
 	vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 	fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit); // Asgurar que los objetos ifstream puedan generar execepciones
+
+	gShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
 	try {
 		vShaderFile.open(vertexPath);
@@ -23,6 +28,14 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
 
 		vertexCode = vShaderStream.str();
 		fragmentCode = fShaderStream.str();
+
+		if (geometryPath != nullptr) {
+			gShaderFile.open(geometryPath);
+			std::stringstream gShaderStream;
+			gShaderStream << gShaderFile.rdbuf();
+			gShaderFile.close();
+			geometryCode = gShaderStream.str();
+		}
 	}
 	catch (std::ifstream::failure e) { // Si en caso de no abrir archivos 
 		std::cout << "ERROR::SHADER::ARCHIVO_NO_ENCONTRADO" << std::endl;
@@ -43,14 +56,29 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
 	glCompileShader(fragment);
 	checkCompileErrors(fragment, "FRAGMENT");
 
+	unsigned int geometry;
+	if (geometryPath != nullptr) {
+		const char* gShaderCode = geometryCode.c_str();
+		geometry = glCreateShader(GL_GEOMETRY_SHADER);
+		glShaderSource(geometry, 1, &gShaderCode, NULL);
+		glCompileShader(geometry);
+		checkCompileErrors(geometry, "GEOMETRY");
+	}
+
 	ID = glCreateProgram();
 	glAttachShader(ID, vertex);
 	glAttachShader(ID, fragment);
+	if (geometryPath != nullptr) {
+		glAttachShader(ID, geometry);
+	}
 	glLinkProgram(ID);
 	checkCompileErrors(ID, "PROGRAM");
 
 	glDeleteShader(vertex);
 	glDeleteShader(fragment);
+	if (geometryPath != nullptr) {
+		glDeleteShader(geometry);
+	}
 }
 
 void Shader::use()
@@ -104,7 +132,7 @@ void Shader::checkCompileErrors(GLuint shader, std::string type)
 		glGetProgramiv(shader, GL_LINK_STATUS, &success);
 		if (!success) {
 			glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-			std::cout << "ERROR::SHADER_LINKEO_PROGRAMA de tipo" << type << "\n" << infoLog << std::endl;
+			std::cout << "ERROR::SHADER_LINKEO_PROGRAMA de tipo " << type << "\n" << infoLog << std::endl;
 		}
 	}
 }
