@@ -2,8 +2,9 @@
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 
+#include<stb_image.h>
+
 #include<Shader.h>
-#include<Model.h>
 #include<Camara.h>
 
 #include<iostream>
@@ -12,17 +13,18 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
-unsigned int cargarImagen(const char *path);
+unsigned int cargarImagen(const char* path);
 
 Camara camara(glm::vec3(0.0f, 0.0f, 3.0f));
 float lastX = 800 / 2.0f;
 float lastY = 800 / 2.0f;
 bool firstMouse = true;
 
+bool blinn = false;
+bool blinnKeyPressend = false;
+
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
-
-glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
 int main() {
 	glfwInit();
@@ -47,13 +49,43 @@ int main() {
 		std::cout << "No se pudo inicializar GLAD" << std::endl;
 		return -1;
 	}
-	stbi_set_flip_vertically_on_load(true);
 
 	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
 
-	Shader shader("./src/4.-OpenGLAvanzado/4.14.-ObjetosExplosivos/modelo.vert", "./src/4.-OpenGLAvanzado/4.14.-ObjetosExplosivos/modelo.frag", "./src/4.-OpenGLAvanzado/4.14.-ObjetosExplosivos/modelo.geom");
+	Shader shader("./src/5.-IluminacionAvanzada/5.1-BlingPhong/bling_phong.vert", "./src/5.-IluminacionAvanzada/5.1-BlingPhong/bling_phong.frag");
 
-	Model mochila("./objetos/backpack/backpack.obj");
+	float planeVertices[] = {
+		// posision          // cordenadas texturas
+		 10.0f, -0.5f,  10.0f,  0.0f, 1.0f, 0.0f,  10.0f,  0.0f,
+		-10.0f, -0.5f,  10.0f,  0.0f, 1.0f, 0.0f,   0.0f,  0.0f,
+		-10.0f, -0.5f, -10.0f,  0.0f, 1.0f, 0.0f,   0.0f, 10.0f,
+
+		 10.0f, -0.5f,  10.0f,  0.0f, 1.0f, 0.0f,  10.0f,  0.0f,
+		-10.0f, -0.5f, -10.0f,  0.0f, 1.0f, 0.0f,   0.0f, 10.0f,
+		 10.0f, -0.5f, -10.0f,  0.0f, 1.0f, 0.0f,  10.0f, 10.0f
+	};
+
+	unsigned int planeVAO, planeVBO;
+	glGenVertexArrays(1, &planeVAO);
+	glGenBuffers(1, &planeVBO);
+	glBindVertexArray(planeVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, planeVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(planeVertices), &planeVertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glBindVertexArray(0);
+
+	unsigned int floorTexture = cargarImagen("./texturas/wood.png");
+
+	shader.use();
+	shader.setInt("floorTexture", 0);
+
+	glm::vec3 lightPos(0.0f, 0.0f, 0.0f);
 
 	while (!glfwWindowShouldClose(window)) {
 		// Entradas
@@ -67,17 +99,22 @@ int main() {
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)800 / (float)600, 1.0f, 100.0f);
-		glm::mat4 view = camara.GetViewMatrix();
-		glm::mat4 model = glm::mat4(1.0f);
 		shader.use();
+		glm::mat4 projection = glm::perspective(glm::radians(camara.Zoom), (float)800 / (float)600, 0.1f, 100.0f);
+		glm::mat4 view = camara.GetViewMatrix();
 		shader.setMat4("projection", projection);
 		shader.setMat4("view", view);
-		shader.setMat4("model", model);
 
-		shader.setFloat("time", static_cast<float>(glfwGetTime()));
+		shader.setVec3("viewPos", camara.Position);
+		shader.setVec3("lightPos", lightPos);
+		shader.setInt("blinn", blinn);
 
-		mochila.Draw(shader);
+		glBindVertexArray(planeVAO);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, floorTexture);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		std::cout << (blinn ? "Blinn-Phong" : "Phong") << std::endl;
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -106,6 +143,13 @@ void processInput(GLFWwindow* window) {
 	}
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
 		camara.ProcessKeyboard(RIGHT, deltaTime);
+	}
+	if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS && !blinnKeyPressend) {
+		blinn = !blinn;
+		blinnKeyPressend = true;
+	}
+	if (glfwGetKey(window, GLFW_KEY_B) == GLFW_RELEASE) {
+		blinnKeyPressend = false;
 	}
 }
 

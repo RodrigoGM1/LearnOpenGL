@@ -51,9 +51,37 @@ int main() {
 
 	glEnable(GL_DEPTH_TEST);
 
-	Shader shader("./src/4.-OpenGLAvanzado/4.14.-ObjetosExplosivos/modelo.vert", "./src/4.-OpenGLAvanzado/4.14.-ObjetosExplosivos/modelo.frag", "./src/4.-OpenGLAvanzado/4.14.-ObjetosExplosivos/modelo.geom");
+	Shader shader("./src/4.-OpenGLAvanzado/4.17.-CampoAsteroides/modelo.vert", "./src/4.-OpenGLAvanzado/4.17.-CampoAsteroides/modelo.frag");
 
-	Model mochila("./objetos/backpack/backpack.obj");
+	Model planeta("./objetos/planet/planet.obj");
+	Model piedras("./objetos/rock/rock.obj");
+
+	unsigned int amount = 1000;
+	glm::mat4* modelMatrices;
+	modelMatrices = new glm::mat4[amount];
+	srand(glfwGetTime());
+	float radius = 50.0;
+	float offset = 2.5f;
+	for (unsigned int i = 0; i < amount; i++) {
+		glm::mat4 model = glm::mat4(1.0f);
+
+		float angle = (float)i / (float)amount * 360.0f;
+		float displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;
+		float x = sin(angle) * radius + displacement;
+		displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;
+		float y = displacement * 0.4f;
+		displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;
+		float z = cos(angle) * radius + displacement;
+		model = glm::translate(model, glm::vec3(x, y, z));
+
+		float scale = (rand() % 10) / 100.0f + 0.05;
+		model = glm::scale(model, glm::vec3(scale));
+
+		float rotAngle = (rand() % 360);
+		model = glm::rotate(model, rotAngle, glm::vec3(0.4f, 0.6f, 0.8f));
+
+		modelMatrices[i] = model;
+	}
 
 	while (!glfwWindowShouldClose(window)) {
 		// Entradas
@@ -67,17 +95,22 @@ int main() {
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)800 / (float)600, 1.0f, 100.0f);
+		glm::mat4 projection = glm::perspective(glm::radians(camara.Zoom), (float)800 / (float)600, 0.1f, 100.0f);
 		glm::mat4 view = camara.GetViewMatrix();
-		glm::mat4 model = glm::mat4(1.0f);
 		shader.use();
 		shader.setMat4("projection", projection);
 		shader.setMat4("view", view);
+
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, -3.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
 		shader.setMat4("model", model);
+		planeta.Draw(shader);
 
-		shader.setFloat("time", static_cast<float>(glfwGetTime()));
-
-		mochila.Draw(shader);
+		for (unsigned int i = 0; i < amount; i++) {
+			shader.setMat4("model", modelMatrices[i]);
+			piedras.Draw(shader);
+		}
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

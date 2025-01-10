@@ -219,6 +219,27 @@
     <ClCompile Include="src\4.-OpenGLAvanzado\4.14.-ObjetosExplosivos\modelo_explocion.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.15.-VectoresNormales\vectores_normales.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.16.-Instantiation\instantiation.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.17.-CampoAsteroides\campo_asteroides.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.18.-CampoAsteroidesInstanced\campo_asteroides_instanced.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\4.-OpenGLAvanzado\4.19.-MSAA\msaa.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\5.-IluminacionAvanzada\5.1-BlingPhong\bling_phong.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\5.-IluminacionAvanzada\5.2.-CorrecionGamma\correcion_gamma.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shader.h">
@@ -402,6 +423,27 @@
     <None Include="src\4.-OpenGLAvanzado\4.14.-ObjetosExplosivos\modelo.frag" />
     <None Include="src\4.-OpenGLAvanzado\4.14.-ObjetosExplosivos\modelo.vert" />
     <None Include="src\4.-OpenGLAvanzado\4.14.-ObjetosExplosivos\modelo.geom" />
+    <None Include="src\4.-OpenGLAvanzado\4.15.-VectoresNormales\modelo.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.15.-VectoresNormales\modelo.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.15.-VectoresNormales\vectores.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.15.-VectoresNormales\vectores.geom" />
+    <None Include="src\4.-OpenGLAvanzado\4.15.-VectoresNormales\vectores.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.16.-Instantiation\instantiation.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.16.-Instantiation\instantiation.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.17.-CampoAsteroides\modelo.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.17.-CampoAsteroides\modelo.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.18.-CampoAsteroidesInstanced\planeta.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.18.-CampoAsteroidesInstanced\planeta.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.18.-CampoAsteroidesInstanced\asteroide.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.18.-CampoAsteroidesInstanced\asteroide.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.19.-MSAA\msaa.vert" />
+    <None Include="src\4.-OpenGLAvanzado\4.19.-MSAA\msaa.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.19.-MSAA\apost.frag" />
+    <None Include="src\4.-OpenGLAvanzado\4.19.-MSAA\apost.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.1-BlingPhong\bling_phong.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.1-BlingPhong\bling_phong.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.2.-CorrecionGamma\correcion_gamma.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.2.-CorrecionGamma\correcion_gamma.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\container.jpg">
@@ -465,6 +507,9 @@
       <Filter>Archivos de recursos</Filter>
     </Image>
     <Image Include="texturas\skyboxPrueba\skybox1\6.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\wood.png">
       <Filter>Archivos de recursos</Filter>
     </Image>
   </ItemGroup>

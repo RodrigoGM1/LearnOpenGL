@@ -51,9 +51,10 @@ int main() {
 
 	glEnable(GL_DEPTH_TEST);
 
-	Shader shader("./src/4.-OpenGLAvanzado/4.14.-ObjetosExplosivos/modelo.vert", "./src/4.-OpenGLAvanzado/4.14.-ObjetosExplosivos/modelo.frag", "./src/4.-OpenGLAvanzado/4.14.-ObjetosExplosivos/modelo.geom");
+	Shader ourShader("./src/4.-OpenGLAvanzado/4.15.-VectoresNormales/modelo.vert", "./src/4.-OpenGLAvanzado/4.15.-VectoresNormales/modelo.frag");
+	Shader normalShader("./src/4.-OpenGLAvanzado/4.15.-VectoresNormales/vectores.vert", "./src/4.-OpenGLAvanzado/4.15.-VectoresNormales/vectores.frag", "./src/4.-OpenGLAvanzado/4.15.-VectoresNormales/vectores.geom");
 
-	Model mochila("./objetos/backpack/backpack.obj");
+	Model ourModel("./objetos/backpack/backpack.obj");
 
 	while (!glfwWindowShouldClose(window)) {
 		// Entradas
@@ -67,17 +68,26 @@ int main() {
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)800 / (float)600, 1.0f, 100.0f);
+		ourShader.use();
+
+		glm::mat4 projection = glm::perspective(glm::radians(camara.Zoom), (float)800 / (float)600, 0.1f, 100.0f);
 		glm::mat4 view = camara.GetViewMatrix();
+		ourShader.setMat4("projection", projection);
+		ourShader.setMat4("view", view);
+
 		glm::mat4 model = glm::mat4(1.0f);
-		shader.use();
-		shader.setMat4("projection", projection);
-		shader.setMat4("view", view);
-		shader.setMat4("model", model);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		ourShader.setMat4("model", model);
 
-		shader.setFloat("time", static_cast<float>(glfwGetTime()));
+		ourModel.Draw(ourShader);
 
-		mochila.Draw(shader);
+		normalShader.use();
+		normalShader.setMat4("projection", projection);
+		normalShader.setMat4("view", view);
+		normalShader.setMat4("model", model);
+
+		ourModel.Draw(ourShader);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
