@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -216,6 +216,9 @@
     <ClCompile Include="src\4.-OpenGLAvanzado\4.9.-CubeMapsReflexion\maps_cubicos_reflexion.cpp" />
     <ClCompile Include="src\5.-IluminacionAvanzada\5.1-BlingPhong\bling_phong.cpp" />
     <ClCompile Include="src\5.-IluminacionAvanzada\5.2.-CorrecionGamma\correcion_gamma.cpp" />
+    <ClCompile Include="src\5.-IluminacionAvanzada\5.3.-MapeoSombreadoProfundidad\shadow_mapping_depth.cpp" />
+    <ClCompile Include="src\5.-IluminacionAvanzada\5.4.-ReprecentacionSombras\reprecentacion_sombras.cpp" />
+    <ClCompile Include="src\5.-IluminacionAvanzada\5.5.-SombrasPuntuales\sombras_puntuales.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Camara.h" />
@@ -410,6 +413,21 @@
     <None Include="src\5.-IluminacionAvanzada\5.1-BlingPhong\bling_phong.vert" />
     <None Include="src\5.-IluminacionAvanzada\5.2.-CorrecionGamma\correcion_gamma.frag" />
     <None Include="src\5.-IluminacionAvanzada\5.2.-CorrecionGamma\correcion_gamma.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.3.-MapeoSombreadoProfundidad\debug_quad.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.3.-MapeoSombreadoProfundidad\debug_quad.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.3.-MapeoSombreadoProfundidad\mapa_profundidad.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.3.-MapeoSombreadoProfundidad\mapa_profundidad.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.4.-ReprecentacionSombras\debug_quad.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.4.-ReprecentacionSombras\debug_quad.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.4.-ReprecentacionSombras\mapa_profundidad.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.4.-ReprecentacionSombras\mapa_profundidad.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.4.-ReprecentacionSombras\sombreador_mapas.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.4.-ReprecentacionSombras\sombreador_mapas.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.5.-SombrasPuntuales\pont_shadows_depth.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.5.-SombrasPuntuales\pont_shadows_depth.geom" />
+    <None Include="src\5.-IluminacionAvanzada\5.5.-SombrasPuntuales\pont_shadows_depth.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.5.-SombrasPuntuales\pont_shadows.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.5.-SombrasPuntuales\pont_shadows.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="objetos\backpack\ao.jpg" />
