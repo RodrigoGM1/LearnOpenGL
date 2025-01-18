@@ -219,6 +219,8 @@
     <ClCompile Include="src\5.-IluminacionAvanzada\5.3.-MapeoSombreadoProfundidad\shadow_mapping_depth.cpp" />
     <ClCompile Include="src\5.-IluminacionAvanzada\5.4.-ReprecentacionSombras\reprecentacion_sombras.cpp" />
     <ClCompile Include="src\5.-IluminacionAvanzada\5.5.-SombrasPuntuales\sombras_puntuales.cpp" />
+    <ClCompile Include="src\5.-IluminacionAvanzada\5.6.-SombrasPuntualesSortFalta\sombras_puntuales_sort.cpp" />
+    <ClCompile Include="src\5.-IluminacionAvanzada\5.7.-MapeoNormal\mapeo_normal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Camara.h" />
@@ -428,6 +430,13 @@
     <None Include="src\5.-IluminacionAvanzada\5.5.-SombrasPuntuales\pont_shadows_depth.vert" />
     <None Include="src\5.-IluminacionAvanzada\5.5.-SombrasPuntuales\pont_shadows.frag" />
     <None Include="src\5.-IluminacionAvanzada\5.5.-SombrasPuntuales\pont_shadows.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.6.-SombrasPuntualesSortFalta\pont_shadows.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.6.-SombrasPuntualesSortFalta\pont_shadows.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.6.-SombrasPuntualesSortFalta\pont_shadows_depth.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.6.-SombrasPuntualesSortFalta\pont_shadows_depth.geom" />
+    <None Include="src\5.-IluminacionAvanzada\5.6.-SombrasPuntualesSortFalta\pont_shadows_depth.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.7.-MapeoNormal\mapeo_normal.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.7.-MapeoNormal\mapeo_normal.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="objetos\backpack\ao.jpg" />
@@ -437,6 +446,8 @@
     <Image Include="objetos\backpack\specular.jpg" />
     <Image Include="texturas\awesomeface.png" />
     <Image Include="texturas\blending_transparent_window.png" />
+    <Image Include="texturas\brickwall.jpg" />
+    <Image Include="texturas\brickwall_normal.jpg" />
     <Image Include="texturas\container.jpg" />
     <Image Include="texturas\container2.png" />
     <Image Include="texturas\container2_specular.png" />

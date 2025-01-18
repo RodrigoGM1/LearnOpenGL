@@ -249,6 +249,12 @@
     <ClCompile Include="src\5.-IluminacionAvanzada\5.5.-SombrasPuntuales\sombras_puntuales.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\5.-IluminacionAvanzada\5.6.-SombrasPuntualesSortFalta\sombras_puntuales_sort.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\5.-IluminacionAvanzada\5.7.-MapeoNormal\mapeo_normal.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shader.h">
@@ -468,6 +474,13 @@
     <None Include="src\5.-IluminacionAvanzada\5.5.-SombrasPuntuales\pont_shadows.vert" />
     <None Include="src\5.-IluminacionAvanzada\5.5.-SombrasPuntuales\pont_shadows.frag" />
     <None Include="src\5.-IluminacionAvanzada\5.5.-SombrasPuntuales\pont_shadows_depth.geom" />
+    <None Include="src\5.-IluminacionAvanzada\5.6.-SombrasPuntualesSortFalta\pont_shadows.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.6.-SombrasPuntualesSortFalta\pont_shadows.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.6.-SombrasPuntualesSortFalta\pont_shadows_depth.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.6.-SombrasPuntualesSortFalta\pont_shadows_depth.geom" />
+    <None Include="src\5.-IluminacionAvanzada\5.6.-SombrasPuntualesSortFalta\pont_shadows_depth.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.7.-MapeoNormal\mapeo_normal.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.7.-MapeoNormal\mapeo_normal.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\container.jpg">
@@ -534,6 +547,12 @@
       <Filter>Archivos de recursos</Filter>
     </Image>
     <Image Include="texturas\wood.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\brickwall.jpg">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\brickwall_normal.jpg">
       <Filter>Archivos de recursos</Filter>
     </Image>
   </ItemGroup>

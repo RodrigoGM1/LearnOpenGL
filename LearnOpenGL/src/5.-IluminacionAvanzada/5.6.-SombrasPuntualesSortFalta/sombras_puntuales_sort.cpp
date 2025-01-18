@@ -59,8 +59,8 @@ int main() {
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 
-	Shader shader("./src/5.-IluminacionAvanzada/5.5.-SombrasPuntuales/pont_shadows.vert", "./src/5.-IluminacionAvanzada/5.5.-SombrasPuntuales/pont_shadows.frag");
-	Shader simpleDepthShader("./src/5.-IluminacionAvanzada/5.5.-SombrasPuntuales/pont_shadows_depth.vert", "./src/5.-IluminacionAvanzada/5.5.-SombrasPuntuales/pont_shadows_depth.frag", "./src/5.-IluminacionAvanzada/5.5.-SombrasPuntuales/pont_shadows_depth.geom");
+	Shader shader("./src/5.-IluminacionAvanzada/5.6.-SombrasPuntualesSort/pont_shadows.vert", "./src/5.-IluminacionAvanzada/5.6.-SombrasPuntualesSort/pont_shadows.frag");
+	Shader simpleDepthShader("./src/5.-IluminacionAvanzada/5.6.-SombrasPuntualesSort/pont_shadows_depth.vert", "./src/5.-IluminacionAvanzada/5.6.-SombrasPuntualesSort/pont_shadows_depth.frag", "./src/5.-IluminacionAvanzada/5.5.-SombrasPuntuales/pont_shadows_depth.geom");
 
 	unsigned int woodTexture = cargarImagen("./texturas/wood.png");
 
