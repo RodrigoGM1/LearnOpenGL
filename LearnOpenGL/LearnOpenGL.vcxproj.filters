@@ -255,6 +255,15 @@
     <ClCompile Include="src\5.-IluminacionAvanzada\5.7.-MapeoNormal\mapeo_normal.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\5.-IluminacionAvanzada\5.8.-MapaParaje\mapa_paraje.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\5.-IluminacionAvanzada\5.9.-MapeoParalejePronunciado\mapeo_paralaje_pronunciado.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\5.-IluminacionAvanzada\5.10.-HDR\hdr.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shader.h">
@@ -481,6 +490,14 @@
     <None Include="src\5.-IluminacionAvanzada\5.6.-SombrasPuntualesSortFalta\pont_shadows_depth.vert" />
     <None Include="src\5.-IluminacionAvanzada\5.7.-MapeoNormal\mapeo_normal.vert" />
     <None Include="src\5.-IluminacionAvanzada\5.7.-MapeoNormal\mapeo_normal.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.8.-MapaParaje\mapa_paraje.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.8.-MapaParaje\mapa_paraje.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.9.-MapeoParalejePronunciado\mapa_paraje.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.9.-MapeoParalejePronunciado\mapa_paraje.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.10.-HDR\hdr.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.10.-HDR\hdr.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.10.-HDR\lightting.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.10.-HDR\lightting.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\container.jpg">
@@ -553,6 +570,21 @@
       <Filter>Archivos de recursos</Filter>
     </Image>
     <Image Include="texturas\brickwall_normal.jpg">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\bricks2.jpg">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\bricks2_disp.jpg">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\bricks2_normal.jpg">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\toy_box_disp.png">
+      <Filter>Archivos de recursos</Filter>
+    </Image>
+    <Image Include="texturas\toy_box_normal.png">
       <Filter>Archivos de recursos</Filter>
     </Image>
   </ItemGroup>

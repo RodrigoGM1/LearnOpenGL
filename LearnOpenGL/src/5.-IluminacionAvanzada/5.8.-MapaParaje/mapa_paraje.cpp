@@ -19,6 +19,7 @@ void renderQuad();
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
+float heightScale = 0.1f;
 
 Camara camara(glm::vec3(0.0f, 0.0f, 3.0f));
 float lastX = 800 / 2.0f;
@@ -54,14 +55,16 @@ int main() {
 
 	glEnable(GL_DEPTH_TEST);
 
-	Shader shader("./src/5.-IluminacionAvanzada/5.7.-MapeoNormal/mapeo_normal.vert", "./src/5.-IluminacionAvanzada/5.7.-MapeoNormal/mapeo_normal.frag");
+	Shader shader("./src/5.-IluminacionAvanzada/5.8.-MapaParaje/mapa_paraje.vert", "./src/5.-IluminacionAvanzada/5.8.-MapaParaje/mapa_paraje.frag");
 
-	unsigned int diffuseMap = cargarImagen("./texturas/brickwall.jpg");
-	unsigned int normalMap = cargarImagen("./texturas/brickwall_normal.jpg");
+	unsigned int diffuseMap = cargarImagen("./texturas/bricks2.jpg");
+	unsigned int normalMap = cargarImagen("./texturas/bricks2_normal.jpg");
+	unsigned int heightMap = cargarImagen("./texturas/bricks2_disp.jpg");
 
 	shader.use();
 	shader.setInt("diffuseMap", 0);
 	shader.setInt("normalMap", 1);
+	shader.setInt("depthMap", 2);
 
 	glm::vec3 lightPos(0.5f, 1.0f, 0.3f);
 
@@ -82,16 +85,19 @@ int main() {
 		shader.use();
 		shader.setMat4("projection", projection);
 		shader.setMat4("view", view);
-		
+
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::rotate(model, glm::radians((float)glfwGetTime() * -10.0f), glm::normalize(glm::vec3(1.0, 0.0, 1.0)));
 		shader.setMat4("model", model);
 		shader.setVec3("viewPos", camara.Position);
 		shader.setVec3("lightPos", lightPos);
+		shader.setFloat("heightScale", heightScale);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, diffuseMap);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, normalMap);
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, heightMap);
 		renderQuad();
 
 		model = glm::mat4(1.0f);
