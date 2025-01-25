@@ -6,6 +6,7 @@
 
 #include<Shader.h>
 #include<Camara.h>
+#include<Model.h>
 
 #include<iostream>
 #include<vector>
@@ -20,11 +21,8 @@ void renderCube();
 
 const unsigned int SCR_WIDHT = 800;
 const unsigned int SCR_HEIGHT = 600;
-bool hdr = true;
-bool hdrKeyPressed = false;
-float exposure = 1.0f;
 
-Camara camara(glm::vec3(0.0f, 0.0f, 3.0f));
+Camara camara(glm::vec3(0.0f, 0.0f, 5.0f));
 float lastX = (float)SCR_WIDHT / 2.0f;
 float lastY = (float)SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
@@ -56,52 +54,86 @@ int main() {
 		return -1;
 	}
 
+	stbi_set_flip_vertically_on_load(true);
+
 	glEnable(GL_DEPTH_TEST);
 
-	Shader shader("./src/5.-IluminacionAvanzada/5.10.-HDR/lightting.vert", "./src/5.-IluminacionAvanzada/5.10.-HDR/lightting.frag");
-	Shader hdrShader("./src/5.-IluminacionAvanzada/5.10.-HDR/hdr.vert", "./src/5.-IluminacionAvanzada/5.10.-HDR/hdr.frag");
+	Shader shaderGeometryPass("./src/5.-IluminacionAvanzada/5.12.-SombreadorDiferido/g_buffer.vert", "./src/5.-IluminacionAvanzada/5.12.-SombreadorDiferido/g_buffer.frag");
+	Shader shaderLightingPass("./src/5.-IluminacionAvanzada/5.12.-SombreadorDiferido/defrred_shading.vert", "./src/5.-IluminacionAvanzada/5.12.-SombreadorDiferido/defrred_shading.frag");
+	Shader shaderLightBox("./src/5.-IluminacionAvanzada/5.12.-SombreadorDiferido/deferred_light_box.vert", "./src/5.-IluminacionAvanzada/5.12.-SombreadorDiferido/deferred_light_box.frag");
 
-	unsigned int woodTexture = cargarImagen("./texturas/wood.png", true);
+	Model backPack("./objetos/backpack/backpack.obj");
+	std::vector<glm::vec3> objectPositions;
+	objectPositions.push_back(glm::vec3(-3.0, -0.5, -3.0));
+	objectPositions.push_back(glm::vec3(0.0, -0.5, -3.0));
+	objectPositions.push_back(glm::vec3(3.0, -0.5, -3.0));
+	objectPositions.push_back(glm::vec3(-3.0, -0.5, 0.0));
+	objectPositions.push_back(glm::vec3(0.0, -0.5, 0.0));
+	objectPositions.push_back(glm::vec3(3.0, -0.5, 0.0));
+	objectPositions.push_back(glm::vec3(-3.0, -0.5, 3.0));
+	objectPositions.push_back(glm::vec3(0.0, -0.5, 3.0));
+	objectPositions.push_back(glm::vec3(3.0, -0.5, 3.0));
 
-	unsigned int hdrFBO;
-	glGenFramebuffers(1, &hdrFBO);
+	unsigned int gBuffer;
+	glGenFramebuffers(1, &gBuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
+	unsigned int gPosition, gNormal, gAlbedoSpec;
 
-	unsigned int colorBuffer;
-	glGenTextures(1, &colorBuffer);
-	glBindTexture(GL_TEXTURE_2D, colorBuffer);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SCR_WIDHT, SCR_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glGenTextures(1, &gPosition);
+	glBindTexture(GL_TEXTURE_2D, gPosition);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, SCR_WIDHT, SCR_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gPosition, 0);
+
+	glGenTextures(1, &gNormal);
+	glBindTexture(GL_TEXTURE_2D, gNormal);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, SCR_WIDHT, SCR_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, gNormal, 0);
+
+	glGenTextures(1, &gAlbedoSpec);
+	glBindTexture(GL_TEXTURE_2D, gAlbedoSpec);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, SCR_WIDHT, SCR_HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, gAlbedoSpec, 0);
+
+	unsigned int attachments[3] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2};
+	glDrawBuffers(3, attachments);
 
 	unsigned int rboDepth;
 	glGenRenderbuffers(1, &rboDepth);
 	glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, SCR_WIDHT, SCR_HEIGHT);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorBuffer, 0);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
+
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
 		std::cout << "Framebuffer no esta completo!" << std::endl;
 	}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
+	const unsigned int NR_LIGHTS = 32;
 	std::vector<glm::vec3> lightPositions;
-	lightPositions.push_back(glm::vec3(0.0f, 0.0f, 49.5f));
-	lightPositions.push_back(glm::vec3(-1.4f, -1.9f, 9.0f));
-	lightPositions.push_back(glm::vec3(0.0f, -1.7f, 4.50f));
-	lightPositions.push_back(glm::vec3(0.8f, -1.7f, 6.0f));
-
 	std::vector<glm::vec3> lightColors;
-	lightColors.push_back(glm::vec3(200.0f, 200.0f, 200.0f));
-	lightColors.push_back(glm::vec3(0.1f, 0.0f, 0.0f));
-	lightColors.push_back(glm::vec3(0.0f, 0.0f, 0.2f));
-	lightColors.push_back(glm::vec3(0.0f, 0.1f, 0.0f));
+	srand(13);
+	for (unsigned int i = 0; i < NR_LIGHTS; i++) {
+		float xPos = static_cast<float>(((rand() % 100) / 100.0) * 6.0 - 3.0);
+		float yPos = static_cast<float>(((rand() % 100) / 100.0) * 6.0 - 4.0);
+		float zPos = static_cast<float>(((rand() % 100) / 100.0) * 6.0 - 3.0);
+		lightPositions.push_back(glm::vec3(xPos, yPos, zPos));
+		// also calculate random color
+		float rColor = static_cast<float>(((rand() % 100) / 200.0f) + 0.5); // between 0.5 and 1.0
+		float gColor = static_cast<float>(((rand() % 100) / 200.0f) + 0.5); // between 0.5 and 1.0
+		float bColor = static_cast<float>(((rand() % 100) / 200.0f) + 0.5); // between 0.5 and 1.0
+		lightColors.push_back(glm::vec3(rColor, gColor, bColor));
+	}
 
-	shader.use();
-	shader.setInt("diffuseTexture", 0);
-	hdrShader.use();
-	hdrShader.setInt("hdrBuffer", 0);
+	shaderLightingPass.use();
+	shaderLightingPass.setInt("gPosition", 0);
+	shaderLightingPass.setInt("gNormal", 1);
+	shaderLightingPass.setInt("gAlbedoSpec", 2);
 
 	while (!glfwWindowShouldClose(window)) {
 		// Entradas
@@ -115,39 +147,61 @@ int main() {
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
+		glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glm::mat4 projection = glm::perspective(glm::radians(camara.Zoom), (GLfloat)SCR_WIDHT / (GLfloat)SCR_HEIGHT, 0.1f, 100.0f);
+		glm::mat4 projection = glm::perspective(glm::radians(camara.Zoom), (float)SCR_WIDHT / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		glm::mat4 view = camara.GetViewMatrix();
-		shader.use();
-		shader.setMat4("projection", projection);
-		shader.setMat4("view", view);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, woodTexture);
-
-		for (unsigned int i = 0; i < lightPositions.size(); i++) {
-			shader.setVec3("lights[" + std::to_string(i) + "].Position", lightPositions[i]);
-			shader.setVec3("lights[" + std::to_string(i) + "].Color", lightColors[i]);
-		}
-		shader.setVec3("viewPos", camara.Position);
-
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 25.0f));
-		model = glm::scale(model, glm::vec3(2.5f, 2.5f, 27.5f));
-		shader.setMat4("model", model);
-		shader.setInt("inverse_normals", true);
-		renderCube();
+		shaderGeometryPass.use();
+		shaderGeometryPass.setMat4("projection", projection);
+		shaderGeometryPass.setMat4("view", view);
+		for (unsigned int i = 0; i < objectPositions.size(); i++) {
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, objectPositions[i]);
+			model = glm::scale(model, glm::vec3(0.5f));
+			shaderGeometryPass.setMat4("model", model);
+			backPack.Draw(shaderGeometryPass);
+		}
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		hdrShader.use();
+		shaderLightingPass.use();
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, colorBuffer);
-		hdrShader.setInt("hdr", hdr);
-		hdrShader.setFloat("exposure", exposure);
+		glBindTexture(GL_TEXTURE_2D, gPosition);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, gNormal);
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, gAlbedoSpec);
+
+		for (unsigned int i = 0; i < lightPositions.size(); i++) {
+			shaderLightingPass.setVec3("lights[" + std::to_string(i) + "].Position", lightPositions[i]);
+			shaderLightingPass.setVec3("lights[" + std::to_string(i) + "].Color", lightColors[i]);
+
+			const float linear = 0.7f;
+			const float	quadratic = 1.8f;
+			shaderLightingPass.setFloat("lights[" + std::to_string(i) + "].Linear", linear);
+			shaderLightingPass.setFloat("lights[" + std::to_string(i) + "].Quadratic", quadratic);
+		}
+		shaderLightingPass.setVec3("viewPos", camara.Position);
 		renderQuad();
 
-		std::cout << "hdr: " << (hdr ? "on" : "off") << "| exposire: " << exposure << std::endl;
+		glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
+		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+
+		glBlitFramebuffer(0, 0, SCR_WIDHT, SCR_HEIGHT, 0, 0, SCR_WIDHT, SCR_HEIGHT, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+		shaderLightBox.use();
+		shaderLightBox.setMat4("projection", projection);
+		shaderLightBox.setMat4("view", view);
+		for (unsigned int i = 0; i < lightPositions.size(); i++) {
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, lightPositions[i]);
+			model = glm::scale(model, glm::vec3(0.125f));
+			shaderLightBox.setMat4("model", model);
+			shaderLightBox.setVec3("lightColor", lightColors[i]);
+			renderCube();
+		}
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -273,27 +327,6 @@ void processInput(GLFWwindow* window) {
 	}
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
 		camara.ProcessKeyboard(RIGHT, deltaTime);
-	}
-	
-
-	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && !hdrKeyPressed) {
-		hdr = !hdr;
-		hdrKeyPressed = true;
-	}
-	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_RELEASE) {
-		hdrKeyPressed = false;
-	}
-
-	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
-		if (exposure > 0.0f) {
-			exposure -= 0.0001f;
-		}
-		else {
-			exposure = 0.0f;
-		}
-	}
-	else if(glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
-		exposure += 0.0001f;
 	}
 }
 

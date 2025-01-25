@@ -1,5 +1,5 @@
 /*
-#include<glad/glad.h>
+#include<glad/glad.h>80
 #include<GLFW/glfw3.h>
 
 #include<stb_image.h>
@@ -20,8 +20,8 @@ void renderCube();
 
 const unsigned int SCR_WIDHT = 800;
 const unsigned int SCR_HEIGHT = 600;
-bool hdr = true;
-bool hdrKeyPressed = false;
+bool bloom = true;
+bool bloomKeyPressed = false;
 float exposure = 1.0f;
 
 Camara camara(glm::vec3(0.0f, 0.0f, 3.0f));
@@ -58,50 +58,80 @@ int main() {
 
 	glEnable(GL_DEPTH_TEST);
 
-	Shader shader("./src/5.-IluminacionAvanzada/5.10.-HDR/lightting.vert", "./src/5.-IluminacionAvanzada/5.10.-HDR/lightting.frag");
-	Shader hdrShader("./src/5.-IluminacionAvanzada/5.10.-HDR/hdr.vert", "./src/5.-IluminacionAvanzada/5.10.-HDR/hdr.frag");
+	Shader shader("./src/5.-IluminacionAvanzada/5.11.-Bloom/bloom.vert", "./src/5.-IluminacionAvanzada/5.11.-Bloom/bloom.frag");
+	Shader shaderLight("./src/5.-IluminacionAvanzada/5.11.-Bloom/bloom.vert", "./src/5.-IluminacionAvanzada/5.11.-Bloom/light_box.frag");
+	Shader shaderBlur("./src/5.-IluminacionAvanzada/5.11.-Bloom/blur.vert", "./src/5.-IluminacionAvanzada/5.11.-Bloom/blur.frag");
+	Shader shaderBloomFinal("./src/5.-IluminacionAvanzada/5.11.-Bloom/bloom_final.vert", "./src/5.-IluminacionAvanzada/5.11.-Bloom/bloom_final.frag");
 
 	unsigned int woodTexture = cargarImagen("./texturas/wood.png", true);
+	unsigned int contanerTexture = cargarImagen("./texturas/container2.png", true);
 
 	unsigned int hdrFBO;
 	glGenFramebuffers(1, &hdrFBO);
+	glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
 
-	unsigned int colorBuffer;
-	glGenTextures(1, &colorBuffer);
-	glBindTexture(GL_TEXTURE_2D, colorBuffer);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SCR_WIDHT, SCR_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	unsigned int colorBuffer[2];
+	glGenTextures(2, colorBuffer);
+	for (unsigned int i = 0; i < 2; i++) {
+		glBindTexture(GL_TEXTURE_2D, colorBuffer[i]);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, SCR_WIDHT, SCR_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, colorBuffer[i], 0);
+	}
 
 	unsigned int rboDepth;
 	glGenRenderbuffers(1, &rboDepth);
 	glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, SCR_WIDHT, SCR_HEIGHT);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorBuffer, 0);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
+
+	unsigned int attachments[2] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+	glDrawBuffers(2, attachments);
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
 		std::cout << "Framebuffer no esta completo!" << std::endl;
 	}
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);	
+
+	unsigned int pingpongFBO[2];
+	unsigned int pingpongColorbuffer[2];
+	glGenFramebuffers(2, pingpongFBO);
+	glGenTextures(2, pingpongColorbuffer);
+	for (unsigned int i = 0; i < 2; i++) {
+		glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[i]);
+		glBindTexture(GL_TEXTURE_2D, pingpongColorbuffer[i]);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, SCR_WIDHT, SCR_HEIGHT, 0, GL_RGBA, GL_FLOAT, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, pingpongColorbuffer[i], 0);
+		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+			std::cout << "Framebuffer no esta completo!" << std::endl;
+		}
+	}
 
 	std::vector<glm::vec3> lightPositions;
-	lightPositions.push_back(glm::vec3(0.0f, 0.0f, 49.5f));
-	lightPositions.push_back(glm::vec3(-1.4f, -1.9f, 9.0f));
-	lightPositions.push_back(glm::vec3(0.0f, -1.7f, 4.50f));
-	lightPositions.push_back(glm::vec3(0.8f, -1.7f, 6.0f));
+	lightPositions.push_back(glm::vec3(0.0f, 0.5f, 1.5f));
+	lightPositions.push_back(glm::vec3(-4.0f, 0.5f, -3.0f));
+	lightPositions.push_back(glm::vec3(3.0f, 0.5f, 1.0f));
+	lightPositions.push_back(glm::vec3(-0.8f, 2.4f, -1.0f));
 
 	std::vector<glm::vec3> lightColors;
-	lightColors.push_back(glm::vec3(200.0f, 200.0f, 200.0f));
-	lightColors.push_back(glm::vec3(0.1f, 0.0f, 0.0f));
-	lightColors.push_back(glm::vec3(0.0f, 0.0f, 0.2f));
-	lightColors.push_back(glm::vec3(0.0f, 0.1f, 0.0f));
+	lightColors.push_back(glm::vec3(5.0f, 5.0f, 5.0f));
+	lightColors.push_back(glm::vec3(10.0f, 0.0f, 0.0f));
+	lightColors.push_back(glm::vec3(0.0f, 0.0f, 15.0f));
+	lightColors.push_back(glm::vec3(0.0f, 5.0f, 0.0f));
 
 	shader.use();
 	shader.setInt("diffuseTexture", 0);
-	hdrShader.use();
-	hdrShader.setInt("hdrBuffer", 0);
+	shaderBlur.use();
+	shaderBlur.setInt("image", 0);
+	shaderBloomFinal.use();
+	shaderBloomFinal.setInt("scene", 0);
+	shaderBloomFinal.setInt("bloomBlur", 1);
 
 	while (!glfwWindowShouldClose(window)) {
 		// Entradas
@@ -119,6 +149,7 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glm::mat4 projection = glm::perspective(glm::radians(camara.Zoom), (GLfloat)SCR_WIDHT / (GLfloat)SCR_HEIGHT, 0.1f, 100.0f);
 		glm::mat4 view = camara.GetViewMatrix();
+		glm::mat4 model = glm::mat4(1.0f);
 		shader.use();
 		shader.setMat4("projection", projection);
 		shader.setMat4("view", view);
@@ -131,23 +162,90 @@ int main() {
 		}
 		shader.setVec3("viewPos", camara.Position);
 
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 25.0f));
-		model = glm::scale(model, glm::vec3(2.5f, 2.5f, 27.5f));
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(12.5f, 0.5f, 12.5f));
 		shader.setMat4("model", model);
-		shader.setInt("inverse_normals", true);
 		renderCube();
+		
+		glBindTexture(GL_TEXTURE_2D, contanerTexture);
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 1.5f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.5f));
+		shader.setMat4("model", model);
+		renderCube();
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(2.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(0.5f));
+		shader.setMat4("model", model);
+		renderCube();
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(-1.0f, -1.0f, 2.0f));
+		model = glm::rotate(model, glm::radians(60.0f), glm::normalize(glm::vec3(1.0, 0.0, 1.0)));
+		shader.setMat4("model", model);
+		renderCube();
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 2.7f, 4.0f));
+		model = glm::rotate(model, glm::radians(23.0f), glm::normalize(glm::vec3(1.0, 0.0, 1.0)));
+		model = glm::scale(model, glm::vec3(1.25));
+		shader.setMat4("model", model);
+		renderCube();
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(-2.0f, 1.0f, -3.0f));
+		model = glm::rotate(model, glm::radians(124.0f), glm::normalize(glm::vec3(1.0, 0.0, 1.0)));
+		shader.setMat4("model", model);
+		renderCube();
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(-3.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.5f));
+		shader.setMat4("model", model);
+		renderCube();
+
+		shaderLight.use();
+		shaderLight.setMat4("projection", projection);
+		shaderLight.setMat4("view", view);
+
+		for (unsigned int i = 0; i < lightPositions.size(); i++) {
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, glm::vec3(lightPositions[i]));
+			model = glm::scale(model, glm::vec3	(0.25f));
+			shaderLight.setMat4("model", model);
+			shaderLight.setVec3("lightColor", lightColors[i]);
+			renderCube();
+		}
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+		bool horizontal = true, first_iteration = true;
+		unsigned int amount = 10;
+		shaderBlur.use();
+		for (unsigned int i = 0; i < amount; i++) {
+			glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[horizontal]);
+			shaderBlur.setInt("horizontal", horizontal);
+			glBindTexture(GL_TEXTURE_2D, first_iteration ? colorBuffer[1] : pingpongColorbuffer[!horizontal]);
+			renderQuad();
+			horizontal = !horizontal;
+			if (first_iteration) {
+				first_iteration = false;
+			}
+		}
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		hdrShader.use();
+		shaderBloomFinal.use();
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, colorBuffer);
-		hdrShader.setInt("hdr", hdr);
-		hdrShader.setFloat("exposure", exposure);
+		glBindTexture(GL_TEXTURE_2D, colorBuffer[0]);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, pingpongColorbuffer[!horizontal]);
+		shaderBloomFinal.setInt("bloom", bloom);
+		shaderBloomFinal.setFloat("exposure", exposure);
 		renderQuad();
 
-		std::cout << "hdr: " << (hdr ? "on" : "off") << "| exposire: " << exposure << std::endl;
+		std::cout << "bloom: " << (bloom ? "on" : "off") << "| exposire: " << exposure << std::endl;
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -274,14 +372,14 @@ void processInput(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
 		camara.ProcessKeyboard(RIGHT, deltaTime);
 	}
-	
 
-	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && !hdrKeyPressed) {
-		hdr = !hdr;
-		hdrKeyPressed = true;
+
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && !bloomKeyPressed) {
+		bloom = !bloom;
+		bloomKeyPressed = true;
 	}
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_RELEASE) {
-		hdrKeyPressed = false;
+		bloomKeyPressed = false;
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
@@ -292,7 +390,7 @@ void processInput(GLFWwindow* window) {
 			exposure = 0.0f;
 		}
 	}
-	else if(glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
+	else if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
 		exposure += 0.0001f;
 	}
 }

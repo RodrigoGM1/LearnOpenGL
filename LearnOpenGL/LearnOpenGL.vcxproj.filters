@@ -264,6 +264,15 @@
     <ClCompile Include="src\5.-IluminacionAvanzada\5.10.-HDR\hdr.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\5.-IluminacionAvanzada\5.11.-Bloom\bloom.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\5.-IluminacionAvanzada\5.12.-SombreadorDiferido\sombreador_diferido.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\5.-IluminacionAvanzada\5.13.-SombreadorDefinidoVol\sombreador_diferido_vol.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shader.h">
@@ -498,6 +507,25 @@
     <None Include="src\5.-IluminacionAvanzada\5.10.-HDR\hdr.frag" />
     <None Include="src\5.-IluminacionAvanzada\5.10.-HDR\lightting.vert" />
     <None Include="src\5.-IluminacionAvanzada\5.10.-HDR\lightting.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.11.-Bloom\bloom.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.11.-Bloom\bloom.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.11.-Bloom\light_box.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.11.-Bloom\blur.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.11.-Bloom\blur.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.11.-Bloom\bloom_final.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.11.-Bloom\bloom_final.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.12.-SombreadorDiferido\g_buffer.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.12.-SombreadorDiferido\g_buffer.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.12.-SombreadorDiferido\defrred_shading.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.12.-SombreadorDiferido\defrred_shading.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.12.-SombreadorDiferido\deferred_light_box.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.12.-SombreadorDiferido\deferred_light_box.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.13.-SombreadorDefinidoVol\deferred_light_box.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.13.-SombreadorDefinidoVol\deferred_light_box.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.13.-SombreadorDefinidoVol\defrred_shading.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.13.-SombreadorDefinidoVol\defrred_shading.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.13.-SombreadorDefinidoVol\g_buffer.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.13.-SombreadorDefinidoVol\g_buffer.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\container.jpg">
