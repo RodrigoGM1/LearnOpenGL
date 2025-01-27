@@ -219,6 +219,7 @@
     <ClCompile Include="src\5.-IluminacionAvanzada\5.11.-Bloom\bloom.cpp" />
     <ClCompile Include="src\5.-IluminacionAvanzada\5.12.-SombreadorDiferido\sombreador_diferido.cpp" />
     <ClCompile Include="src\5.-IluminacionAvanzada\5.13.-SombreadorDefinidoVol\sombreador_diferido_vol.cpp" />
+    <ClCompile Include="src\5.-IluminacionAvanzada\5.14.-SSAO\ssao.cpp" />
     <ClCompile Include="src\5.-IluminacionAvanzada\5.2.-CorrecionGamma\correcion_gamma.cpp" />
     <ClCompile Include="src\5.-IluminacionAvanzada\5.3.-MapeoSombreadoProfundidad\shadow_mapping_depth.cpp" />
     <ClCompile Include="src\5.-IluminacionAvanzada\5.4.-ReprecentacionSombras\reprecentacion_sombras.cpp" />
@@ -442,6 +443,12 @@
     <None Include="src\5.-IluminacionAvanzada\5.13.-SombreadorDefinidoVol\defrred_shading.vert" />
     <None Include="src\5.-IluminacionAvanzada\5.13.-SombreadorDefinidoVol\g_buffer.frag" />
     <None Include="src\5.-IluminacionAvanzada\5.13.-SombreadorDefinidoVol\g_buffer.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.14.-SSAO\ssao.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.14.-SSAO\ssao.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.14.-SSAO\ssao_blur.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.14.-SSAO\ssao_geometry.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.14.-SSAO\ssao_geometry.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.14.-SSAO\ssao_lighing.frag" />
     <None Include="src\5.-IluminacionAvanzada\5.2.-CorrecionGamma\correcion_gamma.frag" />
     <None Include="src\5.-IluminacionAvanzada\5.2.-CorrecionGamma\correcion_gamma.vert" />
     <None Include="src\5.-IluminacionAvanzada\5.3.-MapeoSombreadoProfundidad\debug_quad.frag" />

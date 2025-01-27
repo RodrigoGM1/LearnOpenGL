@@ -273,6 +273,9 @@
     <ClCompile Include="src\5.-IluminacionAvanzada\5.13.-SombreadorDefinidoVol\sombreador_diferido_vol.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\5.-IluminacionAvanzada\5.14.-SSAO\ssao.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Shader.h">
@@ -526,6 +529,12 @@
     <None Include="src\5.-IluminacionAvanzada\5.13.-SombreadorDefinidoVol\defrred_shading.vert" />
     <None Include="src\5.-IluminacionAvanzada\5.13.-SombreadorDefinidoVol\g_buffer.frag" />
     <None Include="src\5.-IluminacionAvanzada\5.13.-SombreadorDefinidoVol\g_buffer.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.14.-SSAO\ssao.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.14.-SSAO\ssao.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.14.-SSAO\ssao_geometry.vert" />
+    <None Include="src\5.-IluminacionAvanzada\5.14.-SSAO\ssao_geometry.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.14.-SSAO\ssao_lighing.frag" />
+    <None Include="src\5.-IluminacionAvanzada\5.14.-SSAO\ssao_blur.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\container.jpg">
