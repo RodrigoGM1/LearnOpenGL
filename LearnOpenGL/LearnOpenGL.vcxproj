@@ -119,7 +119,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;assimp-vc143-mtd.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -137,14 +137,16 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;assimp-vc143-mtd.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="clases\Camara.cpp" />
+    <ClCompile Include="clases\Game\ShaderG.cpp" />
     <ClCompile Include="clases\Mesh.cpp" />
     <ClCompile Include="clases\Model.cpp" />
     <ClCompile Include="clases\Shader.cpp" />
+    <ClCompile Include="clases\ShaderG.cpp" />
     <ClCompile Include="clases\stb_image.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="src\1.-Empezando\1.1.-HolaVentana\hola_ventan.cpp" />
@@ -228,16 +230,25 @@
     <ClCompile Include="src\5.-IluminacionAvanzada\5.7.-MapeoNormal\mapeo_normal.cpp" />
     <ClCompile Include="src\5.-IluminacionAvanzada\5.8.-MapaParaje\mapa_paraje.cpp" />
     <ClCompile Include="src\5.-IluminacionAvanzada\5.9.-MapeoParalejePronunciado\mapeo_paralaje_pronunciado.cpp" />
+    <ClCompile Include="src\6.-PBR\6.1.-Lighting\lighting.cpp" />
+    <ClCompile Include="src\7.-EnPractica\7.1.-Depuracion\depuracion.cpp" />
+    <ClCompile Include="src\7.-EnPractica\7.2.-TextRenderizado\text_renderizado.cpp" />
+    <ClCompile Include="clases\Game\Game.cpp" />
+    <ClCompile Include="src\7.-EnPractica\7.3.-Breakout\juego.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Camara.h" />
+    <ClInclude Include="clases\Game\ShaderG.h" />
     <ClInclude Include="clases\Mesh.h" />
     <ClInclude Include="clases\Model.h" />
     <ClInclude Include="clases\Shader.h" />
+    <ClInclude Include="clases\ShaderG.h" />
     <ClInclude Include="clases\stb_image.h" />
+    <ClInclude Include="clases\Game\Game.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp-vc143-mtd.dll" />
+    <None Include="freetype.dll" />
     <None Include="objetos\backpack\backpack.mtl" />
     <None Include="src\1.-Empezando\1.10.-TrianguloVolteado\shader.fs" />
     <None Include="src\1.-Empezando\1.10.-TrianguloVolteado\shader.vs" />
@@ -477,6 +488,12 @@
     <None Include="src\5.-IluminacionAvanzada\5.8.-MapaParaje\mapa_paraje.vert" />
     <None Include="src\5.-IluminacionAvanzada\5.9.-MapeoParalejePronunciado\mapa_paraje.frag" />
     <None Include="src\5.-IluminacionAvanzada\5.9.-MapeoParalejePronunciado\mapa_paraje.vert" />
+    <None Include="src\6.-PBR\6.1.-Lighting\pbr.frag" />
+    <None Include="src\6.-PBR\6.1.-Lighting\pbr.vert" />
+    <None Include="src\7.-EnPractica\7.1.-Depuracion\depuracion.frag" />
+    <None Include="src\7.-EnPractica\7.1.-Depuracion\depuracion.vert" />
+    <None Include="src\7.-EnPractica\7.2.-TextRenderizado\text.frag" />
+    <None Include="src\7.-EnPractica\7.2.-TextRenderizado\text.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="objetos\backpack\ao.jpg" />
@@ -495,6 +512,15 @@
     <Image Include="texturas\container2.png" />
     <Image Include="texturas\container2_specular.png" />
     <Image Include="texturas\grass.png" />
+    <Image Include="texturas\iron\albedo.png" />
+    <Image Include="texturas\iron\ao.png" />
+    <Image Include="texturas\iron\metallic.png" />
+    <Image Include="texturas\iron\normal.png" />
+    <Image Include="texturas\iron\roughness.png" />
+    <Image Include="texturas\iron\rustediron2_basecolor.png" />
+    <Image Include="texturas\iron\rustediron2_metallic.png" />
+    <Image Include="texturas\iron\rustediron2_normal.png" />
+    <Image Include="texturas\iron\rustediron2_roughness.png" />
     <Image Include="texturas\lighting_maps_specular_color.png" />
     <Image Include="texturas\marble.jpg" />
     <Image Include="texturas\matrix.jpg" />
@@ -511,6 +537,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="objetos\backpack\source_attribution.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="fonts\Antonio-Bold.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
