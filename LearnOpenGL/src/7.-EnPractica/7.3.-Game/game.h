@@ -1,9 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
 enum GameState {
 	GAME_ACTIVE,
 	GAME_MENU,
@@ -16,13 +13,14 @@ public:
 	bool Keys[1024];
 	unsigned int Width, Height;
 
-	Game(unsigned int width, unsigned int height);
+	Game(unsigned int widht, unsigned int height);
 	~Game();
 
-private:
 	void Init();
-	void ProcessInput();
+
+	void ProcessInput(float dt);
+	void Update(float dt);
 	void Render();
 };
 
-#endif // ! GAME_H 
+#endif // ! GAME_H

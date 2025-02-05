@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)include;$(SolutionDir)\LearnOpenGL\clases;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)include;$(SolutionDir)\LearnOpenGL\clases;$(SolutionDir)\LearnOpenGL\scr\7.-EnPractica\7.3.-Game;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)libs;$(LibraryPath)</LibraryPath>
     <ExtensionsToDeleteOnClean>$(ExtensionsToDeleteOnClean)</ExtensionsToDeleteOnClean>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)include;$(SolutionDir)\LearnOpenGL\clases;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)include;$(SolutionDir)\LearnOpenGL\clases;$(SolutionDir)\LearnOpenGL\scr\7.-EnPractica\7.3.-Game;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)libs;$(LibraryPath)</LibraryPath>
     <ExtensionsToDeleteOnClean>$(ExtensionsToDeleteOnClean)</ExtensionsToDeleteOnClean>
   </PropertyGroup>
@@ -142,11 +142,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="clases\Camara.cpp" />
-    <ClCompile Include="clases\Game\ShaderG.cpp" />
     <ClCompile Include="clases\Mesh.cpp" />
     <ClCompile Include="clases\Model.cpp" />
     <ClCompile Include="clases\Shader.cpp" />
-    <ClCompile Include="clases\ShaderG.cpp" />
     <ClCompile Include="clases\stb_image.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="src\1.-Empezando\1.1.-HolaVentana\hola_ventan.cpp" />
@@ -233,18 +231,24 @@
     <ClCompile Include="src\6.-PBR\6.1.-Lighting\lighting.cpp" />
     <ClCompile Include="src\7.-EnPractica\7.1.-Depuracion\depuracion.cpp" />
     <ClCompile Include="src\7.-EnPractica\7.2.-TextRenderizado\text_renderizado.cpp" />
-    <ClCompile Include="clases\Game\Game.cpp" />
-    <ClCompile Include="src\7.-EnPractica\7.3.-Breakout\juego.cpp" />
+    <ClCompile Include="src\7.-EnPractica\7.3.-Game\game.cpp" />
+    <ClCompile Include="src\7.-EnPractica\7.3.-Game\program.cpp" />
+    <ClCompile Include="src\7.-EnPractica\7.3.-Game\resource_manager.cpp" />
+    <ClCompile Include="src\7.-EnPractica\7.3.-Game\shader.cpp" />
+    <ClCompile Include="src\7.-EnPractica\7.3.-Game\sprite_renderer.cpp" />
+    <ClCompile Include="src\7.-EnPractica\7.3.-Game\texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clases\Camara.h" />
-    <ClInclude Include="clases\Game\ShaderG.h" />
     <ClInclude Include="clases\Mesh.h" />
     <ClInclude Include="clases\Model.h" />
     <ClInclude Include="clases\Shader.h" />
-    <ClInclude Include="clases\ShaderG.h" />
     <ClInclude Include="clases\stb_image.h" />
-    <ClInclude Include="clases\Game\Game.h" />
+    <ClInclude Include="src\7.-EnPractica\7.3.-Game\game.h" />
+    <ClInclude Include="src\7.-EnPractica\7.3.-Game\resource_manager.h" />
+    <ClInclude Include="src\7.-EnPractica\7.3.-Game\shader.h" />
+    <ClInclude Include="src\7.-EnPractica\7.3.-Game\sprite_renderer.h" />
+    <ClInclude Include="src\7.-EnPractica\7.3.-Game\texture.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp-vc143-mtd.dll" />
@@ -494,6 +498,8 @@
     <None Include="src\7.-EnPractica\7.1.-Depuracion\depuracion.vert" />
     <None Include="src\7.-EnPractica\7.2.-TextRenderizado\text.frag" />
     <None Include="src\7.-EnPractica\7.2.-TextRenderizado\text.vert" />
+    <None Include="src\7.-EnPractica\7.3.-Game\sprite.frag" />
+    <None Include="src\7.-EnPractica\7.3.-Game\sprite.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="objetos\backpack\ao.jpg" />

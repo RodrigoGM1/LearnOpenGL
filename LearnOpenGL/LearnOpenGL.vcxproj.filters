@@ -285,16 +285,22 @@
     <ClCompile Include="src\7.-EnPractica\7.2.-TextRenderizado\text_renderizado.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="clases\Game\Game.cpp">
+    <ClCompile Include="src\7.-EnPractica\7.3.-Game\game.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="clases\ShaderG.cpp">
+    <ClCompile Include="src\7.-EnPractica\7.3.-Game\shader.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="clases\Game\ShaderG.cpp">
+    <ClCompile Include="src\7.-EnPractica\7.3.-Game\texture.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="src\7.-EnPractica\7.3.-Breakout\juego.cpp">
+    <ClCompile Include="src\7.-EnPractica\7.3.-Game\resource_manager.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\7.-EnPractica\7.3.-Game\program.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\7.-EnPractica\7.3.-Game\sprite_renderer.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -314,13 +320,19 @@
     <ClInclude Include="clases\Model.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="clases\Game\Game.h">
+    <ClInclude Include="src\7.-EnPractica\7.3.-Game\game.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="clases\ShaderG.h">
+    <ClInclude Include="src\7.-EnPractica\7.3.-Game\shader.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="clases\Game\ShaderG.h">
+    <ClInclude Include="src\7.-EnPractica\7.3.-Game\texture.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\7.-EnPractica\7.3.-Game\resource_manager.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\7.-EnPractica\7.3.-Game\sprite_renderer.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -572,6 +584,8 @@
     <None Include="freetype.dll" />
     <None Include="src\7.-EnPractica\7.2.-TextRenderizado\text.vert" />
     <None Include="src\7.-EnPractica\7.2.-TextRenderizado\text.frag" />
+    <None Include="src\7.-EnPractica\7.3.-Game\sprite.vert" />
+    <None Include="src\7.-EnPractica\7.3.-Game\sprite.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="texturas\container.jpg">
