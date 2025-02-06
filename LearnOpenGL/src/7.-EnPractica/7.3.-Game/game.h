@@ -1,17 +1,32 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
+#include "game_level.h"
+
 enum GameState {
 	GAME_ACTIVE,
 	GAME_MENU,
 	GAME_WIN
 };
 
+const glm::vec2 PLAYER_SIZE(100.0f, 20.0f);
+const float PLAYER_VELOCITY(500.0f);
+
+const glm::vec2 INITAL_BALL_VELOCITY(100.0f, -350.0f);
+const float	 BALL_RADIUS = 12.5f;
+
 class Game {
 public:
 	GameState State;
 	bool Keys[1024];
 	unsigned int Width, Height;
+
+	//Codiggo Añadido
+	std::vector<GameLevel> Levels;
+	unsigned int Level;
 
 	Game(unsigned int widht, unsigned int height);
 	~Game();

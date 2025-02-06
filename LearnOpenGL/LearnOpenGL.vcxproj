@@ -231,10 +231,14 @@
     <ClCompile Include="src\6.-PBR\6.1.-Lighting\lighting.cpp" />
     <ClCompile Include="src\7.-EnPractica\7.1.-Depuracion\depuracion.cpp" />
     <ClCompile Include="src\7.-EnPractica\7.2.-TextRenderizado\text_renderizado.cpp" />
+    <ClCompile Include="src\7.-EnPractica\7.3.-Game\ball_object_collisions.cpp" />
     <ClCompile Include="src\7.-EnPractica\7.3.-Game\game.cpp" />
+    <ClCompile Include="src\7.-EnPractica\7.3.-Game\game_level.cpp" />
+    <ClCompile Include="src\7.-EnPractica\7.3.-Game\game_object.cpp" />
     <ClCompile Include="src\7.-EnPractica\7.3.-Game\program.cpp" />
     <ClCompile Include="src\7.-EnPractica\7.3.-Game\resource_manager.cpp" />
     <ClCompile Include="src\7.-EnPractica\7.3.-Game\shader.cpp" />
+    <ClCompile Include="src\7.-EnPractica\7.3.-Game\game_object.h" />
     <ClCompile Include="src\7.-EnPractica\7.3.-Game\sprite_renderer.cpp" />
     <ClCompile Include="src\7.-EnPractica\7.3.-Game\texture.cpp" />
   </ItemGroup>
@@ -244,7 +248,9 @@
     <ClInclude Include="clases\Model.h" />
     <ClInclude Include="clases\Shader.h" />
     <ClInclude Include="clases\stb_image.h" />
+    <ClInclude Include="src\7.-EnPractica\7.3.-Game\ball_object_collisions.h" />
     <ClInclude Include="src\7.-EnPractica\7.3.-Game\game.h" />
+    <ClInclude Include="src\7.-EnPractica\7.3.-Game\game_level.h" />
     <ClInclude Include="src\7.-EnPractica\7.3.-Game\resource_manager.h" />
     <ClInclude Include="src\7.-EnPractica\7.3.-Game\shader.h" />
     <ClInclude Include="src\7.-EnPractica\7.3.-Game\sprite_renderer.h" />
@@ -498,6 +504,10 @@
     <None Include="src\7.-EnPractica\7.1.-Depuracion\depuracion.vert" />
     <None Include="src\7.-EnPractica\7.2.-TextRenderizado\text.frag" />
     <None Include="src\7.-EnPractica\7.2.-TextRenderizado\text.vert" />
+    <None Include="src\7.-EnPractica\7.3.-Game\levels\four.lvl" />
+    <None Include="src\7.-EnPractica\7.3.-Game\levels\one.lvl" />
+    <None Include="src\7.-EnPractica\7.3.-Game\levels\three.lvl" />
+    <None Include="src\7.-EnPractica\7.3.-Game\levels\two.lvl" />
     <None Include="src\7.-EnPractica\7.3.-Game\sprite.frag" />
     <None Include="src\7.-EnPractica\7.3.-Game\sprite.vert" />
   </ItemGroup>
@@ -508,7 +518,10 @@
     <Image Include="objetos\backpack\roughness.jpg" />
     <Image Include="objetos\backpack\specular.jpg" />
     <Image Include="texturas\awesomeface.png" />
+    <Image Include="texturas\background.jpg" />
     <Image Include="texturas\blending_transparent_window.png" />
+    <Image Include="texturas\block.png" />
+    <Image Include="texturas\block_solid.png" />
     <Image Include="texturas\bricks2.jpg" />
     <Image Include="texturas\bricks2_disp.jpg" />
     <Image Include="texturas\bricks2_normal.jpg" />
@@ -531,6 +544,7 @@
     <Image Include="texturas\marble.jpg" />
     <Image Include="texturas\matrix.jpg" />
     <Image Include="texturas\metal.png" />
+    <Image Include="texturas\paddle.png" />
     <Image Include="texturas\skyboxPrueba\skybox1\1.png" />
     <Image Include="texturas\skyboxPrueba\skybox1\2.png" />
     <Image Include="texturas\skyboxPrueba\skybox1\3.png" />
