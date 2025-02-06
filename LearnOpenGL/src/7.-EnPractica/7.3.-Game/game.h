@@ -12,11 +12,20 @@ enum GameState {
 	GAME_WIN
 };
 
+enum Direction {
+	UP,
+	RIGHT,
+	DOWN, 
+	LEFT
+};
+
 const glm::vec2 PLAYER_SIZE(100.0f, 20.0f);
 const float PLAYER_VELOCITY(500.0f);
 
 const glm::vec2 INITAL_BALL_VELOCITY(100.0f, -350.0f);
 const float	 BALL_RADIUS = 12.5f;
+
+typedef std::tuple<bool, Direction, glm::vec2> Collision;
 
 class Game {
 public:
@@ -36,6 +45,10 @@ public:
 	void ProcessInput(float dt);
 	void Update(float dt);
 	void Render();
+	void DoCollisions();
+
+	void ResetLevel();
+	void ResetPlayer();
 };
 
 #endif // ! GAME_H
