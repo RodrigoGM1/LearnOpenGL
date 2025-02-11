@@ -1,4 +1,3 @@
-/*
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 
@@ -75,4 +74,3 @@ void processInput(GLFWwindow* window) {
 	}
 	//En este apartado nos permite comprobar si la tecla Esc fue precionado para poder cerrar la ventana.
 }
-*/

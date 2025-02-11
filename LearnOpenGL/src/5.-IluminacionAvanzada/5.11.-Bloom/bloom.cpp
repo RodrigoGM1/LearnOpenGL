@@ -1,4 +1,3 @@
-/*
 #include<glad/glad.h>80
 #include<GLFW/glfw3.h>
 
@@ -460,4 +459,3 @@ unsigned int cargarImagen(const char* path, bool gammaCorrectio) {
 	}
 	return textureID;
 }
-*/

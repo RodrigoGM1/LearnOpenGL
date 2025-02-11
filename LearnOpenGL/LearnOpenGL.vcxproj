@@ -235,6 +235,8 @@
     <ClCompile Include="src\7.-EnPractica\7.3.-Game\game.cpp" />
     <ClCompile Include="src\7.-EnPractica\7.3.-Game\game_level.cpp" />
     <ClCompile Include="src\7.-EnPractica\7.3.-Game\game_object.cpp" />
+    <ClCompile Include="src\7.-EnPractica\7.3.-Game\particle_generator.cpp" />
+    <ClCompile Include="src\7.-EnPractica\7.3.-Game\post_processor.cpp" />
     <ClCompile Include="src\7.-EnPractica\7.3.-Game\program.cpp" />
     <ClCompile Include="src\7.-EnPractica\7.3.-Game\resource_manager.cpp" />
     <ClCompile Include="src\7.-EnPractica\7.3.-Game\shader.cpp" />
@@ -251,6 +253,9 @@
     <ClInclude Include="src\7.-EnPractica\7.3.-Game\ball_object_collisions.h" />
     <ClInclude Include="src\7.-EnPractica\7.3.-Game\game.h" />
     <ClInclude Include="src\7.-EnPractica\7.3.-Game\game_level.h" />
+    <ClInclude Include="src\7.-EnPractica\7.3.-Game\particle_generator.h" />
+    <ClInclude Include="src\7.-EnPractica\7.3.-Game\post_processor.h" />
+    <ClInclude Include="src\7.-EnPractica\7.3.-Game\power_up.h" />
     <ClInclude Include="src\7.-EnPractica\7.3.-Game\resource_manager.h" />
     <ClInclude Include="src\7.-EnPractica\7.3.-Game\shader.h" />
     <ClInclude Include="src\7.-EnPractica\7.3.-Game\sprite_renderer.h" />
@@ -508,6 +513,10 @@
     <None Include="src\7.-EnPractica\7.3.-Game\levels\one.lvl" />
     <None Include="src\7.-EnPractica\7.3.-Game\levels\three.lvl" />
     <None Include="src\7.-EnPractica\7.3.-Game\levels\two.lvl" />
+    <None Include="src\7.-EnPractica\7.3.-Game\particle.frag" />
+    <None Include="src\7.-EnPractica\7.3.-Game\particle.vert" />
+    <None Include="src\7.-EnPractica\7.3.-Game\postprocessing.frag" />
+    <None Include="src\7.-EnPractica\7.3.-Game\postprocessing.vert" />
     <None Include="src\7.-EnPractica\7.3.-Game\sprite.frag" />
     <None Include="src\7.-EnPractica\7.3.-Game\sprite.vert" />
   </ItemGroup>
@@ -545,6 +554,13 @@
     <Image Include="texturas\matrix.jpg" />
     <Image Include="texturas\metal.png" />
     <Image Include="texturas\paddle.png" />
+    <Image Include="texturas\particle.png" />
+    <Image Include="texturas\powerup_chaos.png" />
+    <Image Include="texturas\powerup_confuse.png" />
+    <Image Include="texturas\powerup_increase.png" />
+    <Image Include="texturas\powerup_passthrough.png" />
+    <Image Include="texturas\powerup_speed.png" />
+    <Image Include="texturas\powerup_sticky.png" />
     <Image Include="texturas\skyboxPrueba\skybox1\1.png" />
     <Image Include="texturas\skyboxPrueba\skybox1\2.png" />
     <Image Include="texturas\skyboxPrueba\skybox1\3.png" />

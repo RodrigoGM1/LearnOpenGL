@@ -1,4 +1,3 @@
-/*
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <ft2build.h>
@@ -175,7 +174,6 @@ void RenderText(Shader& shader, std::string text, float x, float y, float scale,
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
-*/
 
 /*
 #include <glad/glad.h>

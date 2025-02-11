@@ -1,4 +1,3 @@
-/*
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 
@@ -305,4 +304,3 @@ unsigned int cargarImagen(const char* path) {
 	}
 	return textureID;
 }
-*/

@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 
 #include "game_level.h"
+#include "power_up.h"
 
 enum GameState {
 	GAME_ACTIVE,
@@ -19,13 +20,13 @@ enum Direction {
 	LEFT
 };
 
+typedef std::tuple<bool, Direction, glm::vec2> Collision;
+
 const glm::vec2 PLAYER_SIZE(100.0f, 20.0f);
 const float PLAYER_VELOCITY(500.0f);
 
 const glm::vec2 INITAL_BALL_VELOCITY(100.0f, -350.0f);
 const float	 BALL_RADIUS = 12.5f;
-
-typedef std::tuple<bool, Direction, glm::vec2> Collision;
 
 class Game {
 public:
@@ -35,6 +36,7 @@ public:
 
 	//Codiggo Añadido
 	std::vector<GameLevel> Levels;
+	std::vector<PowerUp> PowerUps;
 	unsigned int Level;
 
 	Game(unsigned int widht, unsigned int height);
@@ -49,6 +51,9 @@ public:
 
 	void ResetLevel();
 	void ResetPlayer();
+
+	void SpawnPowerUps(GameObject &block);
+	void UpdatePowerUps(float dt);
 };
 
 #endif // ! GAME_H

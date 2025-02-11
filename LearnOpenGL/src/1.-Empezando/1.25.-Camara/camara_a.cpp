@@ -1,10 +1,10 @@
-//#include<glad/glad.h>
-//#include<GLFW/glfw3.h>
-//
-//#include<Shader.h>
-//#include<stb_image.h>
-//
-//#include<iostream>
+#include<glad/glad.h>
+#include<GLFW/glfw3.h>
+
+#include<Shader.h>
+#include<stb_image.h>
+
+#include<iostream>
 
 /*
 int main() {
@@ -23,7 +23,6 @@ int main() {
 }
 */
 
-/*
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
@@ -237,4 +236,3 @@ void processInput(GLFWwindow* window) {
 		glfwSetWindowShouldClose(window, true);
 	}
 }
-*/

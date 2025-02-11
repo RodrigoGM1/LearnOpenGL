@@ -1,4 +1,3 @@
-/*
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 
@@ -244,4 +243,3 @@ glm::mat4 calculate_lookAt_matrix(glm::vec3 position, glm::vec3 targrt, glm::vec
 
 	return rotation * traslation;
 }
-*/

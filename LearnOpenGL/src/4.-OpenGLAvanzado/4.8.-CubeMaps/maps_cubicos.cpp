@@ -1,4 +1,3 @@
-/*
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 
@@ -359,4 +358,3 @@ unsigned int cargarMapacubico(std::vector<std::string> faces) {
 
 	return textureID;
 }
-*/
